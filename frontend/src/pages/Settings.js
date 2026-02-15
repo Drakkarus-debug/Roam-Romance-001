@@ -30,13 +30,13 @@ const Settings = () => {
   return (
     <AppLayout>
       <div className="max-w-2xl mx-auto p-4 pb-8">
-        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
           {t('settings')}
         </h1>
 
         {/* Discovery Settings */}
-        <Card className="p-6 mb-4">
-          <h2 className="text-xl font-semibold mb-4">Discovery {t('settings')}</h2>
+        <Card className="p-6 mb-4 bg-black/90 border border-gray-700">
+          <h2 className="text-xl font-semibold mb-4 text-yellow-400">Discovery {t('settings')}</h2>
           
           <div className="space-y-6">
             {/* Distance */}
