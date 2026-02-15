@@ -166,5 +166,6 @@ export const languages = [
   { code: 'ru', name: 'Русский', flag: '🇷🇺' },
   { code: 'ar', name: 'العربية', flag: '🇸🇦' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' }
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' }
 ];
