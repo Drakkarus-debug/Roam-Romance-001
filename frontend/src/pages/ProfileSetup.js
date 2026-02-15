@@ -287,49 +287,200 @@ const ProfileSetup = () => {
           </div>
         )}
 
-        {/* Step 5: Yes/No Questions */}
+        {/* Step 5: Interests & Lifestyle */}
         {step === 5 && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('details')}</h2>
+          <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2">
+            <h2 className="text-2xl font-bold text-center text-yellow-400">Interests & Lifestyle</h2>
             
-            {[
-              { key: 'hasPets', label: t('hasPets') },
-              { key: 'smokes', label: t('smokes') },
-              { key: 'criminalRecord', label: t('criminalRecord') },
-              { key: 'hasPassport', label: t('hasPassport') }
-            ].map((question) => (
-              <div key={question.key}>
-                <Label className="mb-3 block">{question.label}</Label>
-                <RadioGroup
-                  value={profileData[question.key]}
-                  onValueChange={(value) => setProfileData({ ...profileData, [question.key]: value })}
-                  className="grid grid-cols-2 gap-4"
-                >
-                  <Label
-                    htmlFor={`${question.key}-yes`}
-                    className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                      profileData[question.key] === 'yes'
-                        ? 'border-yellow-400 bg-yellow-500/10'
-                        : 'border-gray-200 hover:border-yellow-500/50'
+            {/* Interests */}
+            <div>
+              <Label className="mb-3 block text-white text-lg">Select Your Interests (Choose at least 3)</Label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  'Travel', 'Photography', 'Music', 'Sports', 'Fitness', 'Yoga',
+                  'Cooking', 'Food', 'Wine', 'Coffee', 'Reading', 'Writing',
+                  'Art', 'Movies', 'Dancing', 'Gaming', 'Tech', 'Fashion',
+                  'Hiking', 'Beach', 'Camping', 'Skiing', 'Surfing', 'Pets',
+                  'Dogs', 'Cats', 'Shopping', 'Nature', 'Meditation', 'Volunteering'
+                ].map((interest) => (
+                  <button
+                    key={interest}
+                    type="button"
+                    onClick={() => {
+                      const currentInterests = profileData.interests || [];
+                      if (currentInterests.includes(interest)) {
+                        setProfileData({
+                          ...profileData,
+                          interests: currentInterests.filter(i => i !== interest)
+                        });
+                      } else {
+                        setProfileData({
+                          ...profileData,
+                          interests: [...currentInterests, interest]
+                        });
+                      }
+                    }}
+                    className={`p-2 rounded-lg border-2 text-sm transition-all ${
+                      (profileData.interests || []).includes(interest)
+                        ? 'border-yellow-400 bg-yellow-500/20 text-yellow-400'
+                        : 'border-gray-600 text-gray-300 hover:border-yellow-500/50'
                     }`}
                   >
-                    <RadioGroupItem value="yes" id={`${question.key}-yes`} className="sr-only" />
-                    <span className="font-semibold">{t('yes')}</span>
-                  </Label>
-                  <Label
-                    htmlFor={`${question.key}-no`}
-                    className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                      profileData[question.key] === 'no'
-                        ? 'border-yellow-400 bg-yellow-500/10'
-                        : 'border-gray-200 hover:border-yellow-500/50'
-                    }`}
-                  >
-                    <RadioGroupItem value="no" id={`${question.key}-no`} className="sr-only" />
-                    <span className="font-semibold">{t('no')}</span>
-                  </Label>
-                </RadioGroup>
+                    {interest}
+                  </button>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Drinking */}
+            <div>
+              <Label className="mb-3 block text-white">Do you drink?</Label>
+              <RadioGroup
+                value={profileData.drinking}
+                onValueChange={(value) => setProfileData({ ...profileData, drinking: value })}
+                className="grid grid-cols-3 gap-3"
+              >
+                {['Never', 'Socially', 'Regularly'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`drinking-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.drinking === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`drinking-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Smoking */}
+            <div>
+              <Label className="mb-3 block text-white">Do you smoke?</Label>
+              <RadioGroup
+                value={profileData.smokes}
+                onValueChange={(value) => setProfileData({ ...profileData, smokes: value })}
+                className="grid grid-cols-3 gap-3"
+              >
+                {['Never', 'Sometimes', 'Regularly'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`smoking-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.smokes === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`smoking-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Exercise */}
+            <div>
+              <Label className="mb-3 block text-white">Exercise Habits</Label>
+              <RadioGroup
+                value={profileData.exercise}
+                onValueChange={(value) => setProfileData({ ...profileData, exercise: value })}
+                className="grid grid-cols-3 gap-3"
+              >
+                {['Rarely', 'Sometimes', 'Active'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`exercise-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.exercise === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`exercise-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Education */}
+            <div>
+              <Label className="mb-3 block text-white">Education Level</Label>
+              <RadioGroup
+                value={profileData.education}
+                onValueChange={(value) => setProfileData({ ...profileData, education: value })}
+                className="grid grid-cols-2 gap-3"
+              >
+                {['High School', 'College', 'Bachelor\'s', 'Master\'s', 'PhD', 'Trade School'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`education-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.education === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`education-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Pets */}
+            <div>
+              <Label className="mb-3 block text-white">Do you have pets?</Label>
+              <RadioGroup
+                value={profileData.hasPets}
+                onValueChange={(value) => setProfileData({ ...profileData, hasPets: value })}
+                className="grid grid-cols-3 gap-3"
+              >
+                {['No', 'Dog', 'Cat', 'Both', 'Other'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`pets-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.hasPets === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`pets-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Kids */}
+            <div>
+              <Label className="mb-3 block text-white">Do you have children?</Label>
+              <RadioGroup
+                value={profileData.hasKids}
+                onValueChange={(value) => setProfileData({ ...profileData, hasKids: value })}
+                className="grid grid-cols-3 gap-3"
+              >
+                {['No', 'Yes', 'Want someday'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`kids-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.hasKids === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`kids-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
           </div>
         )}
 
