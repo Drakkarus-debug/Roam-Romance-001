@@ -1077,7 +1077,9 @@ export const translations = {
     shopping: 'खरीदारी',
     nature: 'प्रकृति',
     meditation: 'ध्यान',
-    volunteering: 'स्वयंसेवा'
+    volunteering: 'स्वयंसेवा',
+    sugarbaby: 'शुगर बेबी',
+    sugardaddy: 'शुगर डैडी'
   },
   tl: {
     appName: 'Roam Romance',
