@@ -371,7 +371,7 @@ const ProfileSetup = () => {
             </div>
 
             <div>
-              <Label>{t('myPhotos')} ({profileData.photos.length}/6)</Label>
+              <Label className="text-white">{t('myPhotos')} ({profileData.photos.length}/6)</Label>
               <div className="grid grid-cols-3 gap-4 mt-3">
                 {profileData.photos.map((photo, index) => (
                   <div key={index} className="relative aspect-square">
