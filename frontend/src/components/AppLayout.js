@@ -39,7 +39,7 @@ const AppLayout = ({ children }) => {
                       : 'text-gray-400 hover:text-gray-200'
                   }`}
                 >
-                  <Icon className={`w-6 h-6 ${isActive ? 'fill-pink-600' : ''}`} />
+                  <Icon className={`w-6 h-6 ${isActive ? 'fill-yellow-400' : ''}`} />
                   <span className="text-xs font-medium">{item.label}</span>
                 </button>
               );
