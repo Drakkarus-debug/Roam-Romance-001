@@ -183,7 +183,7 @@ const ProfileSetup = () => {
         {/* Step 2: Age */}
         {step === 2 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('age')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('age')}</h2>
             <div>
               <Label>{t('age')}</Label>
               <Input
@@ -195,7 +195,7 @@ const ProfileSetup = () => {
                 className="text-lg"
               />
               {profileData.age && profileData.age < 18 && (
-                <p className="text-red-500 text-sm mt-2">{t('mustBe18')}</p>
+                <p className="text-yellow-400 text-sm mt-2">{t('mustBe18')}</p>
               )}
             </div>
           </div>
@@ -204,7 +204,7 @@ const ProfileSetup = () => {
         {/* Step 3: Race */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('selectRace')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('selectRace')}</h2>
             <RadioGroup
               value={profileData.race}
               onValueChange={(value) => setProfileData({ ...profileData, race: value })}
@@ -221,7 +221,7 @@ const ProfileSetup = () => {
                   }`}
                 >
                   <RadioGroupItem value={race.value} id={race.value} className="mr-3" />
-                  <span className="text-lg">{race.label}</span>
+                  <span className="text-lg text-gray-200">{race.label}</span>
                 </Label>
               ))}
             </RadioGroup>
@@ -231,7 +231,7 @@ const ProfileSetup = () => {
         {/* Step 4: Additional Info */}
         {step === 4 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('details')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('details')}</h2>
             
             {/* Weight (for females only) */}
             {profileData.gender === 'female' && (
@@ -288,7 +288,7 @@ const ProfileSetup = () => {
         {/* Step 5: Yes/No Questions */}
         {step === 5 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('details')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('details')}</h2>
             
             {[
               { key: 'hasPets', label: t('hasPets') },
@@ -334,7 +334,7 @@ const ProfileSetup = () => {
         {/* Step 6: Photos & Bio */}
         {step === 6 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('uploadPhotos')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('uploadPhotos')}</h2>
             
             <div>
               <Label>{t('namePlaceholder')}</Label>
