@@ -140,19 +140,19 @@ const Settings = () => {
         </Card>
 
         {/* Subscription */}
-        <Card className="p-6 mb-4">
-          <h2 className="text-xl font-semibold mb-4">{t('subscription')}</h2>
+        <Card className="p-6 mb-4 bg-black/90 border border-gray-700">
+          <h2 className="text-xl font-semibold mb-4 text-yellow-400">{t('subscription')}</h2>
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium">
+              <p className="font-medium text-gray-200">
                 {user?.subscription === 'free' ? 'Free Plan' : `Roam ${user?.subscription}`}
               </p>
               {user?.subscription === 'free' && (
-                <p className="text-sm text-gray-600">5 likes per day</p>
+                <p className="text-sm text-gray-400">5 likes per day</p>
               )}
             </div>
             <Button
-              className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700"
+              className="bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-amber-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-semibold shadow-lg shadow-yellow-500/50"
               onClick={() => navigate('/app/subscription')}
             >
               {user?.subscription === 'free' ? t('upgradeNow') : 'Manage'}
@@ -163,7 +163,7 @@ const Settings = () => {
         {/* Logout */}
         <Button
           variant="outline"
-          className="w-full gap-2 border-red-200 text-red-600 hover:bg-red-50"
+          className="w-full gap-2 border-red-500/50 text-red-400 hover:bg-red-500/10"
           onClick={handleLogout}
         >
           <LogOut className="w-5 h-5" />
