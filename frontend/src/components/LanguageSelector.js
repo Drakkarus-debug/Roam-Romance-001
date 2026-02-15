@@ -8,7 +8,7 @@ const LanguageSelector = ({ onClose }) => {
   const { availableLanguages, currentLanguage, changeLanguage } = useLanguage();
 
   return (
-    <Card className="p-4 w-64 max-h-96 overflow-y-auto bg-white shadow-xl">
+    <Card className="p-4 w-64 max-h-96 overflow-y-auto bg-black shadow-xl border border-yellow-500/30">
       <div className="space-y-2">
         {availableLanguages.map((lang) => (
           <button
@@ -19,8 +19,8 @@ const LanguageSelector = ({ onClose }) => {
             }}
             className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors ${
               currentLanguage === lang.code
-                ? 'bg-yellow-100 text-yellow-400'
-                : 'hover:bg-gray-100'
+                ? 'bg-yellow-500/20 text-yellow-400'
+                : 'hover:bg-gray-800 text-gray-300'
             }`}
           >
             <div className="flex items-center gap-3">
