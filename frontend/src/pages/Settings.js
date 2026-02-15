@@ -122,12 +122,12 @@ const Settings = () => {
           <div className="relative">
             <Button
               variant="outline"
-              className="w-full justify-between"
+              className="w-full justify-between border-gray-600 text-white hover:bg-gray-800 hover:border-yellow-500/50"
               onClick={() => setShowLanguageSelector(!showLanguageSelector)}
             >
               <div className="flex items-center gap-3">
-                <Globe className="w-5 h-5" />
-                <span>{getCurrentLanguageInfo().name}</span>
+                <Globe className="w-5 h-5 text-yellow-400" />
+                <span className="text-white">{getCurrentLanguageInfo().name}</span>
               </div>
               <span className="text-2xl">{getCurrentLanguageInfo().flag}</span>
             </Button>
