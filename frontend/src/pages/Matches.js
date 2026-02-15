@@ -50,14 +50,14 @@ const Matches = () => {
                       className="w-16 h-16 rounded-full object-cover"
                     />
                     {match.unread && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-pink-500 rounded-full border-2 border-white" />
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full border-2 border-white" />
                     )}
                   </div>
                   
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-lg">{match.name}</h3>
                     <p className={`text-sm truncate ${
-                      match.unread ? 'text-pink-600 font-medium' : 'text-gray-600'
+                      match.unread ? 'text-yellow-400 font-medium' : 'text-gray-600'
                     }`}>
                       {match.lastMessage}
                     </p>
@@ -68,7 +68,7 @@ const Matches = () => {
                       {formatTimestamp(match.timestamp)}
                     </span>
                     <MessageCircle className={`w-5 h-5 ${
-                      match.unread ? 'text-pink-500' : 'text-gray-400'
+                      match.unread ? 'text-yellow-400' : 'text-gray-400'
                     }`} />
                   </div>
                 </div>

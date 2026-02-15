@@ -19,7 +19,7 @@ const LanguageSelector = ({ onClose }) => {
             }}
             className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors ${
               currentLanguage === lang.code
-                ? 'bg-pink-100 text-pink-600'
+                ? 'bg-yellow-100 text-yellow-400'
                 : 'hover:bg-gray-100'
             }`}
           >
@@ -28,7 +28,7 @@ const LanguageSelector = ({ onClose }) => {
               <span className="font-medium">{lang.name}</span>
             </div>
             {currentLanguage === lang.code && (
-              <Check className="w-5 h-5 text-pink-600" />
+              <Check className="w-5 h-5 text-yellow-400" />
             )}
           </button>
         ))}

@@ -16,7 +16,7 @@ const AppLayout = ({ children }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex flex-col">
       {/* Main Content */}
       <main className="flex-1 overflow-auto pb-20">
         {children}
@@ -35,7 +35,7 @@ const AppLayout = ({ children }) => {
                   onClick={() => navigate(item.path)}
                   className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors ${
                     isActive
-                      ? 'text-pink-600'
+                      ? 'text-yellow-400'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >

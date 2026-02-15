@@ -51,7 +51,7 @@ const Profile = () => {
               </div>
               <Button
                 variant="outline"
-                className="bg-white text-pink-600 hover:bg-gray-100"
+                className="bg-white text-yellow-400 hover:bg-gray-100"
                 onClick={() => navigate('/app/subscription')}
               >
                 {t('upgradeNow')}

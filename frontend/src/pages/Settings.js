@@ -93,7 +93,7 @@ const Settings = () => {
                   htmlFor="female"
                   className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                     settings.showMe === 'female'
-                      ? 'border-pink-500 bg-pink-50'
+                      ? 'border-yellow-500 bg-yellow-50'
                       : 'border-gray-200 hover:border-pink-300'
                   }`}
                 >
@@ -104,7 +104,7 @@ const Settings = () => {
                   htmlFor="male"
                   className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                     settings.showMe === 'male'
-                      ? 'border-pink-500 bg-pink-50'
+                      ? 'border-yellow-500 bg-yellow-50'
                       : 'border-gray-200 hover:border-pink-300'
                   }`}
                 >
