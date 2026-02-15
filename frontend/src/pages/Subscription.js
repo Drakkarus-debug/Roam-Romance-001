@@ -39,33 +39,33 @@ const Subscription = () => {
               }`}
             >
               {plan.popular && (
-                <div className={`absolute top-4 right-4 px-3 py-1 bg-gradient-to-r ${plan.color} text-white text-sm font-bold rounded-full`}>
+                <div className={`absolute top-4 right-4 px-3 py-1 bg-gradient-to-r ${plan.color} text-black text-sm font-bold rounded-full`}>
                   {t('popular')}
                 </div>
               )}
 
               <div className="mb-6">
                 <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center mb-4`}>
-                  <Crown className="w-8 h-8 text-white" />
+                  <Crown className="w-8 h-8 text-black" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
+                <h2 className="text-2xl font-bold mb-2 text-yellow-400">{plan.name}</h2>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">${plan.price}</span>
-                  <span className="text-gray-600">{t('perMonth')}</span>
+                  <span className="text-4xl font-bold text-gray-100">${plan.price}</span>
+                  <span className="text-gray-400">{t('perMonth')}</span>
                 </div>
               </div>
 
               <ul className="space-y-3 mb-6">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-700">{feature}</span>
+                    <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button
-                className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-white`}
+                className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-black font-semibold shadow-lg`}
                 onClick={() => handleSubscribe(plan.id)}
                 disabled={user?.subscription === plan.id}
               >
@@ -78,6 +78,7 @@ const Subscription = () => {
         <div className="text-center mt-8">
           <Button
             variant="outline"
+            className="border-gray-600 text-gray-300 hover:bg-gray-800"
             onClick={() => navigate('/app/discover')}
           >
             Continue with Free Plan
