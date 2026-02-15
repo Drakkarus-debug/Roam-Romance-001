@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { mockUsers } from '../mockData';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -8,6 +8,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import AppLayout from '../components/AppLayout';
+import confetti from 'canvas-confetti';
 
 const Discover = () => {
   const { t } = useLanguage();
@@ -103,6 +104,22 @@ const Discover = () => {
     localStorage.setItem('roam_swipes_today', (swipesToday + 1).toString());
   };
 
+  const fireMatchCelebration = useCallback(() => {
+    const gold = ['#FFD700', '#FFA500', '#FFEC8B', '#DAA520', '#F0E68C'];
+    // Burst from left
+    confetti({ particleCount: 80, spread: 70, origin: { x: 0.1, y: 0.6 }, colors: gold, angle: 60 });
+    // Burst from right
+    confetti({ particleCount: 80, spread: 70, origin: { x: 0.9, y: 0.6 }, colors: gold, angle: 120 });
+    // Center shower after short delay
+    setTimeout(() => {
+      confetti({ particleCount: 120, spread: 100, origin: { x: 0.5, y: 0.3 }, colors: [...gold, '#FF69B4', '#FF1493'], gravity: 0.8, scalar: 1.2 });
+    }, 300);
+    // Final sparkle
+    setTimeout(() => {
+      confetti({ particleCount: 40, spread: 160, origin: { x: 0.5, y: 0.5 }, colors: gold, ticks: 80, shapes: ['circle'], scalar: 0.6 });
+    }, 700);
+  }, []);
+
   const handleSwipe = (direction) => {
     if (!checkLikesRemaining()) {
       alert(t('upgradeNow'));
@@ -118,6 +135,7 @@ const Discover = () => {
       if (Math.random() > 0.8) {
         setMatchedUser(profiles[currentIndex]);
         setShowMatch(true);
+        fireMatchCelebration();
       }
       incrementSwipes();
     } else {
