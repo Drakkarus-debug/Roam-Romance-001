@@ -169,5 +169,6 @@ export const languages = [
   { code: 'zh', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
   { code: 'tl', name: 'Tagalog', flag: '🇵🇭' },
-  { code: 'am', name: 'አማርኛ', flag: '🇪🇹' }
+  { code: 'am', name: 'አማርኛ', flag: '🇪🇹' },
+  { code: 'ti', name: 'ትግርኛ', flag: '🇪🇷' }
 ];
