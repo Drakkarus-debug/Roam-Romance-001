@@ -385,6 +385,31 @@ const ProfileSetup = () => {
               </RadioGroup>
             </div>
 
+            {/* Criminal Record */}
+            <div>
+              <Label className="mb-3 block text-white">Do you have a criminal record?</Label>
+              <RadioGroup
+                value={profileData.criminalRecord}
+                onValueChange={(value) => setProfileData({ ...profileData, criminalRecord: value })}
+                className="grid grid-cols-2 gap-3"
+              >
+                {['No', 'Yes'].map((option) => (
+                  <Label
+                    key={option}
+                    htmlFor={`criminal-${option}`}
+                    className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                      profileData.criminalRecord === option
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <RadioGroupItem value={option} id={`criminal-${option}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option}</span>
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
+
             {/* Exercise */}
             <div>
               <Label className="mb-3 block text-white">Exercise Habits</Label>
