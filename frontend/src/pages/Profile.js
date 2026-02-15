@@ -84,19 +84,19 @@ const Profile = () => {
         </div>
 
         {/* Profile Info */}
-        <Card className="p-6 mb-4">
+        <Card className="p-6 mb-4 bg-black/90 border border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold">
+              <h1 className="text-3xl font-bold text-yellow-400">
                 {profile.name}, {profile.age}
               </h1>
-              <div className="flex items-center gap-2 text-gray-600 mt-1">
+              <div className="flex items-center gap-2 text-gray-400 mt-1">
                 <MapPin className="w-4 h-4" />
                 <span>{profile.location}</span>
               </div>
             </div>
             {user?.subscription !== 'free' && (
-              <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white">
+              <Badge className="bg-gradient-to-r from-amber-400 to-yellow-500 text-black border-none">
                 <Crown className="w-4 h-4 mr-1" />
                 {user?.subscription === 'plus' && 'Plus'}
                 {user?.subscription === 'gold' && 'Gold'}
@@ -107,15 +107,15 @@ const Profile = () => {
 
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold text-lg mb-2">{t('about')}</h3>
-              <p className="text-gray-700">{profile.bio}</p>
+              <h3 className="font-semibold text-lg mb-2 text-yellow-400">{t('about')}</h3>
+              <p className="text-gray-300">{profile.bio}</p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-lg mb-2">{t('interests')}</h3>
+              <h3 className="font-semibold text-lg mb-2 text-yellow-400">{t('interests')}</h3>
               <div className="flex flex-wrap gap-2">
                 {profile.interests.map((interest, idx) => (
-                  <Badge key={idx} variant="outline" className="px-3 py-1">
+                  <Badge key={idx} variant="outline" className="px-3 py-1 border-gray-600 text-gray-300">
                     {interest}
                   </Badge>
                 ))}
@@ -123,12 +123,12 @@ const Profile = () => {
             </div>
 
             <div>
-              <h3 className="font-semibold text-lg mb-3">{t('details')}</h3>
+              <h3 className="font-semibold text-lg mb-3 text-yellow-400">{t('details')}</h3>
               <div className="space-y-2">
                 {Object.entries(profile.details).map(([key, value]) => (
-                  <div key={key} className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">{key}</span>
-                    <span className="font-medium">{value}</span>
+                  <div key={key} className="flex justify-between py-2 border-b border-gray-700">
+                    <span className="text-gray-400">{key}</span>
+                    <span className="font-medium text-gray-200">{value}</span>
                   </div>
                 ))}
               </div>
