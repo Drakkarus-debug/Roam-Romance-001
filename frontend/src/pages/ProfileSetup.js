@@ -278,11 +278,11 @@ const ProfileSetup = () => {
                     className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                       profileData.reason === reason.value
                         ? 'border-yellow-400 bg-yellow-500/10'
-                        : 'border-gray-200 hover:border-yellow-500/50'
+                        : 'border-gray-600 hover:border-yellow-500/50'
                     }`}
                   >
                     <RadioGroupItem value={reason.value} id={reason.value} className="mr-3" />
-                    <span>{reason.label}</span>
+                    <span className="text-white">{reason.label}</span>
                   </Label>
                 ))}
               </RadioGroup>
