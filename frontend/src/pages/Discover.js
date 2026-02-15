@@ -301,9 +301,9 @@ const Discover = () => {
 
       {/* Match Dialog */}
       <Dialog open={showMatch} onOpenChange={setShowMatch}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md bg-black border border-yellow-500/50">
           <DialogHeader>
-            <DialogTitle className="text-center text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+            <DialogTitle className="text-center text-3xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
               {t('itsAMatch')}
             </DialogTitle>
           </DialogHeader>
@@ -313,13 +313,13 @@ const Discover = () => {
                 <img
                   src={matchedUser.photos[0]}
                   alt={matchedUser.name}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-pink-500"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-yellow-500 shadow-lg shadow-yellow-500/50"
                 />
               </div>
-              <p className="text-lg">You and {matchedUser.name} liked each other!</p>
+              <p className="text-lg text-gray-200">You and {matchedUser.name} liked each other!</p>
               <div className="flex gap-3">
                 <Button
-                  className="flex-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-pink-600 hover:to-rose-700"
+                  className="flex-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-amber-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-semibold shadow-lg shadow-yellow-500/50"
                   onClick={() => {
                     setShowMatch(false);
                     navigate('/app/matches');
@@ -329,7 +329,7 @@ const Discover = () => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="flex-1"
+                  className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-800"
                   onClick={() => setShowMatch(false)}
                 >
                   {t('keepSwiping')}
