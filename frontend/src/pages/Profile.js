@@ -13,6 +13,14 @@ const Profile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // Helper function to translate stored values
+  const translateValue = (key) => {
+    if (!key) return 'Not set';
+    // Convert camelCase to translation key
+    const translationKey = key.replace(/([A-Z])/g, (match) => match.toLowerCase());
+    return t(translationKey) || key.charAt(0).toUpperCase() + key.slice(1);
+  };
+
   // Use actual user profile data
   const profile = {
     name: user?.name || 'User',
@@ -24,18 +32,18 @@ const Profile = () => {
     location: user?.location || 'Location not set',
     interests: user?.interests || [],
     details: {
-      'Gender': user?.gender === 'male' ? t('male') : user?.gender === 'female' ? t('female') : 'Not set',
-      'Race': user?.race ? user.race.charAt(0).toUpperCase() + user.race.slice(1) : 'Not set',
-      'Reason': user?.reason ? user.reason.charAt(0).toUpperCase() + user.reason.slice(1).replace(/([A-Z])/g, ' $1').trim() : 'Not set',
+      [t('selectGender')]: user?.gender ? t(user.gender) : 'Not set',
+      [t('race')]: user?.race ? translateValue(user.race) : 'Not set',
+      [t('reason')]: user?.reason ? translateValue(user.reason) : 'Not set',
       'Drinking': user?.drinking || 'Not set',
       'Smoking': user?.smokes || 'Not set',
       'Exercise': user?.exercise || 'Not set',
       'Education': user?.education || 'Not set',
-      'Pets': user?.hasPets || 'Not set',
+      [t('hasPets')]: user?.hasPets || 'Not set',
       'Children': user?.hasKids || 'Not set',
       'Criminal Record': user?.criminalRecord || 'Not set',
       ...(user?.gender === 'female' && user?.weight ? { 
-        'Weight': `${user.weight.kg} kg / ${user.weight.lbs} lbs` 
+        [t('weight')]: `${user.weight.kg} kg / ${user.weight.lbs} lbs` 
       } : {})
     }
   };
