@@ -119,11 +119,15 @@ const Profile = () => {
             <div>
               <h3 className="font-semibold text-lg mb-2 text-yellow-400">{t('interests')}</h3>
               <div className="flex flex-wrap gap-2">
-                {profile.interests.map((interest, idx) => (
-                  <Badge key={idx} variant="outline" className="px-3 py-1 border-gray-600 text-gray-300">
-                    {interest}
-                  </Badge>
-                ))}
+                {profile.interests.length > 0 ? (
+                  profile.interests.map((interest, idx) => (
+                    <Badge key={idx} variant="outline" className="px-3 py-1 border-gray-600 text-gray-300">
+                      {interest}
+                    </Badge>
+                  ))
+                ) : (
+                  <p className="text-gray-500 text-sm">No interests selected</p>
+                )}
               </div>
             </div>
 
