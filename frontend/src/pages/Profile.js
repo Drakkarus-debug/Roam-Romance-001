@@ -130,7 +130,7 @@ const Profile = () => {
                 {profile.interests.length > 0 ? (
                   profile.interests.map((interest, idx) => (
                     <Badge key={idx} variant="outline" className="px-3 py-1 border-gray-600 text-gray-300">
-                      {interest}
+                      {t(interest) || interest.charAt(0).toUpperCase() + interest.slice(1)}
                     </Badge>
                   ))
                 ) : (
