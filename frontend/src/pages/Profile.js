@@ -40,7 +40,7 @@ const Profile = () => {
       <div className="max-w-2xl mx-auto p-4 pb-8">
         {/* Subscription Banner */}
         {user?.subscription === 'free' && (
-          <Card className="mb-6 p-4 bg-gradient-to-r from-pink-500 to-rose-600 text-white">
+          <Card className="mb-6 p-4 bg-gradient-to-r from-amber-500 via-yellow-500 to-yellow-600 text-black border-none">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Crown className="w-6 h-6" />
@@ -51,7 +51,7 @@ const Profile = () => {
               </div>
               <Button
                 variant="outline"
-                className="bg-white text-yellow-400 hover:bg-gray-100"
+                className="bg-black text-yellow-400 hover:bg-gray-900 border-black"
                 onClick={() => navigate('/app/subscription')}
               >
                 {t('upgradeNow')}
