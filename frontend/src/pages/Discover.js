@@ -358,19 +358,56 @@ const Discover = () => {
 
       {/* Match Dialog */}
       <Dialog open={showMatch} onOpenChange={setShowMatch}>
-        <DialogContent className="max-w-md bg-black border border-yellow-500/50">
+        <DialogContent className="max-w-md bg-black border border-yellow-500/50 overflow-hidden" data-testid="match-dialog">
+          {/* Floating particles background */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {[...Array(12)].map((_, i) => (
+              <span
+                key={i}
+                className="absolute text-yellow-400 opacity-0"
+                style={{
+                  left: `${8 + Math.random() * 84}%`,
+                  bottom: '-20px',
+                  fontSize: `${14 + Math.random() * 18}px`,
+                  animation: `floatUp ${2.5 + Math.random() * 2}s ease-out ${i * 0.2}s forwards`
+                }}
+              >
+                {['♥', '✦', '★', '♥'][i % 4]}
+              </span>
+            ))}
+          </div>
+          <style>{`
+            @keyframes floatUp {
+              0% { transform: translateY(0) scale(0.5); opacity: 0; }
+              20% { opacity: 0.9; }
+              100% { transform: translateY(-350px) scale(1.1) rotate(${Math.random() > 0.5 ? '' : '-'}20deg); opacity: 0; }
+            }
+            @keyframes pulseGlow {
+              0%, 100% { box-shadow: 0 0 15px rgba(234,179,8,0.4), 0 0 30px rgba(234,179,8,0.1); }
+              50% { box-shadow: 0 0 25px rgba(234,179,8,0.7), 0 0 50px rgba(234,179,8,0.3); }
+            }
+            @keyframes scaleIn {
+              0% { transform: scale(0.3); opacity: 0; }
+              60% { transform: scale(1.1); }
+              100% { transform: scale(1); opacity: 1; }
+            }
+          `}</style>
           <DialogHeader>
-            <DialogTitle className="text-center text-3xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
+            <DialogTitle
+              className="text-center text-3xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent"
+              style={{ animation: 'scaleIn 0.5s ease-out' }}
+            >
               {t('itsAMatch')}
             </DialogTitle>
           </DialogHeader>
           {matchedUser && (
-            <div className="text-center space-y-4 py-4">
-              <div className="flex justify-center gap-4">
+            <div className="text-center space-y-4 py-4 relative z-10">
+              <div className="flex justify-center gap-4" style={{ animation: 'scaleIn 0.6s ease-out 0.15s both' }}>
                 <img
                   src={matchedUser.photos[0]}
                   alt={matchedUser.name}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-yellow-500 shadow-lg shadow-yellow-500/50"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-yellow-500"
+                  style={{ animation: 'pulseGlow 2s ease-in-out infinite' }}
                 />
               </div>
               <p className="text-lg text-gray-200">You and {matchedUser.name} liked each other!</p>
