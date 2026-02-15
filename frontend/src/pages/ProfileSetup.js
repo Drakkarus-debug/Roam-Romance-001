@@ -236,7 +236,7 @@ const ProfileSetup = () => {
             {/* Weight (for females only) */}
             {profileData.gender === 'female' && (
               <div>
-                <Label>{t('weight')}</Label>
+                <Label className="text-white">{t('weight')}</Label>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Input
@@ -244,6 +244,7 @@ const ProfileSetup = () => {
                       placeholder="Kg"
                       value={profileData.weight.kg}
                       onChange={(e) => handleWeightChange(e.target.value, 'kg')}
+                      className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
                     />
                   </div>
                   <div>
@@ -252,6 +253,7 @@ const ProfileSetup = () => {
                       placeholder="Lbs"
                       value={profileData.weight.lbs}
                       onChange={(e) => handleWeightChange(e.target.value, 'lbs')}
+                      className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
                     />
                   </div>
                 </div>
@@ -260,7 +262,7 @@ const ProfileSetup = () => {
 
             {/* Reason */}
             <div>
-              <Label>{t('selectReason')}</Label>
+              <Label className="text-white">{t('selectReason')}</Label>
               <RadioGroup
                 value={profileData.reason}
                 onValueChange={(value) => setProfileData({ ...profileData, reason: value })}
