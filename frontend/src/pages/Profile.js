@@ -13,25 +13,30 @@ const Profile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Mock profile data
+  // Use actual user profile data
   const profile = {
-    name: user?.name || 'John Doe',
-    age: user?.age || 28,
-    photos: [
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=600&fit=crop'
-    ],
-    bio: user?.bio || 'Love to travel and explore new places. Coffee enthusiast and adventure seeker.',
-    location: user?.location || 'New York, NY',
-    interests: ['Travel', 'Photography', 'Coffee', 'Hiking'],
+    name: user?.name || 'User',
+    age: user?.age || 18,
+    photos: user?.photos && user?.photos.length > 0 
+      ? user.photos 
+      : ['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=600&fit=crop'],
+    bio: user?.bio || 'No bio yet',
+    location: user?.location || 'Location not set',
+    interests: user?.interests || [],
     details: {
-      [t('race')]: 'White',
-      [t('reason')]: t('marriageMinded'),
-      [t('hasPets')]: t('no'),
-      [t('smokes')]: t('no'),
-      [t('criminalRecord')]: t('no'),
-      [t('hasPassport')]: t('yes')
+      'Gender': user?.gender === 'male' ? t('male') : user?.gender === 'female' ? t('female') : 'Not set',
+      'Race': user?.race || 'Not set',
+      'Reason': user?.reason || 'Not set',
+      'Drinking': user?.drinking || 'Not set',
+      'Smoking': user?.smokes || 'Not set',
+      'Exercise': user?.exercise || 'Not set',
+      'Education': user?.education || 'Not set',
+      'Pets': user?.hasPets || 'Not set',
+      'Children': user?.hasKids || 'Not set',
+      'Criminal Record': user?.criminalRecord || 'Not set',
+      ...(user?.gender === 'female' && user?.weight ? { 
+        'Weight': `${user.weight.kg} kg / ${user.weight.lbs} lbs` 
+      } : {})
     }
   };
 
