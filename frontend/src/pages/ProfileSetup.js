@@ -22,6 +22,7 @@ const ProfileSetup = () => {
     interests: [],
     drinking: '',
     smokes: '',
+    criminalRecord: '',
     exercise: '',
     education: '',
     hasPets: '',
