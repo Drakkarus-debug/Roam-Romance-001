@@ -166,10 +166,10 @@ const Landing = () => {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-sm text-gray-600 hover:text-gray-800"
+            className="text-sm text-gray-400 hover:text-gray-200"
           >
             {isLogin ? t('dontHaveAccount') : t('alreadyHaveAccount')}
-            <span className="text-pink-600 ml-1">
+            <span className="text-yellow-400 ml-1">
               {isLogin ? t('signup') : t('login')}
             </span>
           </button>
