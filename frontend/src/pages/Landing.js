@@ -74,8 +74,8 @@ const Landing = () => {
       </div>
 
       <Card className="w-full max-w-md p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
-        <div className="text-center mb-6">
-          <div className="flex justify-center mb-6 mt-4">
+        <div className="text-center mb-4">
+          <div className="flex justify-center mb-3 mt-4">
             <img 
               src="https://customer-assets.emergentagent.com/job_roam-dating-1/artifacts/c6dvvshx_ChatGPT%20Image%20Feb%2015%2C%202026%2C%2012_26_39%20PM.png"
               alt="Roam Romance Logo"
@@ -83,10 +83,10 @@ const Landing = () => {
               style={{ width: '312px', height: '312px' }}
             />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent mb-1">
             {t('appName')}
           </h1>
-          <p className="text-gray-300">{t('welcome')}</p>
+          <p className="text-gray-300 mb-4">{t('welcome')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
