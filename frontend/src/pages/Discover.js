@@ -276,14 +276,14 @@ const Discover = () => {
             
             <Button
               size="lg"
-              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600"
+              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-amber-600"
             >
               <Star className="w-8 h-8 text-white" />
             </Button>
             
             <Button
               size="lg"
-              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700"
+              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-pink-600 hover:to-rose-700"
               onClick={() => handleSwipe('right')}
             >
               <Heart className="w-8 h-8 text-white fill-white" />
@@ -291,7 +291,7 @@ const Discover = () => {
             
             <Button
               size="lg"
-              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
+              className="w-16 h-16 rounded-full p-0 bg-gradient-to-r from-gray-700 to-gray-900 hover:from-purple-600 hover:to-indigo-700"
             >
               <Zap className="w-8 h-8 text-white" />
             </Button>
@@ -319,7 +319,7 @@ const Discover = () => {
               <p className="text-lg">You and {matchedUser.name} liked each other!</p>
               <div className="flex gap-3">
                 <Button
-                  className="flex-1 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700"
+                  className="flex-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-pink-600 hover:to-rose-700"
                   onClick={() => {
                     setShowMatch(false);
                     navigate('/app/matches');
