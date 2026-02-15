@@ -24,18 +24,18 @@ const Subscription = () => {
     <AppLayout>
       <div className="max-w-6xl mx-auto p-4 pb-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
             {t('choosePlan')}
           </h1>
-          <p className="text-gray-600">Unlock premium features and find your perfect match</p>
+          <p className="text-gray-300">Unlock premium features and find your perfect match</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {subscriptionPlans.map((plan) => (
             <Card
               key={plan.id}
-              className={`p-6 relative overflow-hidden transition-all hover:shadow-xl ${
-                plan.popular ? 'border-2 border-yellow-500 scale-105' : ''
+              className={`p-6 relative overflow-hidden transition-all hover:shadow-xl bg-black/90 ${
+                plan.popular ? 'border-2 border-yellow-500 scale-105' : 'border border-gray-700'
               }`}
             >
               {plan.popular && (
