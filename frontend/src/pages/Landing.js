@@ -94,7 +94,7 @@ const Landing = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full"
+              className="w-full bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
             />
           </div>
           
@@ -105,7 +105,7 @@ const Landing = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full"
+              className="w-full bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
             />
           </div>
 
@@ -117,7 +117,7 @@ const Landing = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full"
+                className="w-full bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
               />
             </div>
           )}
