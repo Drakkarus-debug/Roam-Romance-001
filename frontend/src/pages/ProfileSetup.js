@@ -509,7 +509,7 @@ const ProfileSetup = () => {
 
             {/* Kids */}
             <div>
-              <Label className="mb-3 block text-white">Do you have children?</Label>
+              <Label className="mb-3 block text-white">{t('doYouHaveChildren')}</Label>
               <RadioGroup
                 value={profileData.hasKids}
                 onValueChange={(value) => setProfileData({ ...profileData, hasKids: value })}
