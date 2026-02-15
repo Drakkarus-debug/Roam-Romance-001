@@ -42,8 +42,8 @@ const Settings = () => {
             {/* Distance */}
             <div>
               <div className="flex justify-between mb-3">
-                <Label>{t('distance')}</Label>
-                <span className="text-sm font-medium">{settings.distance[0]} {t('miles')}</span>
+                <Label className="text-white">{t('distance')}</Label>
+                <span className="text-sm font-medium text-white">{settings.distance[0]} {t('miles')}</span>
               </div>
               <Slider
                 value={settings.distance}
@@ -53,7 +53,7 @@ const Settings = () => {
                 step={1}
                 className="w-full"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>1</span>
                 <span>300 {t('miles')}</span>
               </div>
@@ -62,8 +62,8 @@ const Settings = () => {
             {/* Age Range */}
             <div>
               <div className="flex justify-between mb-3">
-                <Label>{t('ageRange')}</Label>
-                <span className="text-sm font-medium">
+                <Label className="text-white">{t('ageRange')}</Label>
+                <span className="text-sm font-medium text-white">
                   {settings.ageRange[0]} - {settings.ageRange[1]}
                 </span>
               </div>
@@ -75,7 +75,7 @@ const Settings = () => {
                 step={1}
                 className="w-full"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>18</span>
                 <span>100</span>
               </div>
@@ -83,7 +83,7 @@ const Settings = () => {
 
             {/* Show Me */}
             <div>
-              <Label className="mb-3 block">{t('showMe')}</Label>
+              <Label className="mb-3 block text-white">{t('showMe')}</Label>
               <RadioGroup
                 value={settings.showMe}
                 onValueChange={(value) => setSettings({ ...settings, showMe: value })}
