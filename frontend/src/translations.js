@@ -1347,7 +1347,9 @@ export const translations = {
     shopping: 'ግብይት',
     nature: 'ተፈጥሮ',
     meditation: 'ማሰላሰል',
-    volunteering: 'በጎ ፈቃድ'
+    volunteering: 'በጎ ፈቃድ',
+    sugarbaby: 'ሹጋር ቤቢ',
+    sugardaddy: 'ሹጋር ዳዲ'
   },
   ti: {
     appName: 'Roam Romance',
