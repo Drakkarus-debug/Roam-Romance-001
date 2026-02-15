@@ -24,7 +24,7 @@ const Subscription = () => {
     <AppLayout>
       <div className="max-w-6xl mx-auto p-4 pb-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+          <h1 data-testid="subscription-heading" className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
             {t('choosePlan')}
           </h1>
           <p className="text-gray-300">{t('unlockPremium')}</p>
@@ -34,6 +34,7 @@ const Subscription = () => {
           {subscriptionPlans.map((plan) => (
             <Card
               key={plan.id}
+              data-testid={`plan-${plan.id}-card`}
               className={`p-6 relative overflow-hidden transition-all hover:shadow-xl bg-black/90 ${
                 plan.popular ? 'border-2 border-yellow-500 scale-105' : 'border border-gray-700'
               }`}
@@ -65,6 +66,7 @@ const Subscription = () => {
               </ul>
 
               <Button
+                data-testid={`plan-${plan.id}-subscribe-btn`}
                 className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-black font-semibold shadow-lg`}
                 onClick={() => handleSubscribe(plan.id)}
                 disabled={user?.subscription === plan.id}
@@ -77,6 +79,7 @@ const Subscription = () => {
 
         <div className="text-center mt-8">
           <Button
+            data-testid="continue-free-btn"
             variant="outline"
             className="border-gray-600 text-gray-300 hover:bg-gray-800"
             onClick={() => navigate('/app/discover')}

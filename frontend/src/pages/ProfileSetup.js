@@ -461,7 +461,7 @@ const ProfileSetup = () => {
                 onValueChange={(value) => setProfileData({ ...profileData, education: value })}
                 className="grid grid-cols-2 gap-3"
               >
-                {['High School', 'College', 'Bachelor\'s', 'Master\'s', 'PhD', 'Trade School'].map((option) => (
+                {['highschool', 'college', 'bachelors', 'masters', 'phd', 'tradeschool'].map((option) => (
                   <Label
                     key={option}
                     htmlFor={`education-${option}`}
@@ -472,7 +472,7 @@ const ProfileSetup = () => {
                     }`}
                   >
                     <RadioGroupItem value={option} id={`education-${option}`} className="sr-only" />
-                    <span className="text-sm font-semibold text-white">{option}</span>
+                    <span className="text-sm font-semibold text-white">{t(option)}</span>
                   </Label>
                 ))}
               </RadioGroup>
