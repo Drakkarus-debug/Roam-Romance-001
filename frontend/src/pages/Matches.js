@@ -26,20 +26,20 @@ const Matches = () => {
   return (
     <AppLayout>
       <div className="max-w-2xl mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
           {t('matches')}
         </h1>
 
         {mockMatches.length === 0 ? (
-          <Card className="p-8 text-center">
-            <p className="text-gray-600">No matches yet. Keep swiping!</p>
+          <Card className="p-8 text-center bg-black/90 border border-gray-700">
+            <p className="text-gray-400">No matches yet. Keep swiping!</p>
           </Card>
         ) : (
           <div className="space-y-3">
             {mockMatches.map((match) => (
               <Card
                 key={match.id}
-                className="p-4 hover:shadow-lg transition-shadow cursor-pointer"
+                className="p-4 hover:shadow-lg transition-shadow cursor-pointer bg-black/90 border border-gray-700 hover:border-yellow-500/50"
                 onClick={() => navigate(`/app/chat/${match.id}`)}
               >
                 <div className="flex items-center gap-4">
@@ -50,14 +50,14 @@ const Matches = () => {
                       className="w-16 h-16 rounded-full object-cover"
                     />
                     {match.unread && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full border-2 border-white" />
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full border-2 border-black" />
                     )}
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-lg">{match.name}</h3>
+                    <h3 className="font-semibold text-lg text-yellow-400">{match.name}</h3>
                     <p className={`text-sm truncate ${
-                      match.unread ? 'text-yellow-400 font-medium' : 'text-gray-600'
+                      match.unread ? 'text-yellow-400 font-medium' : 'text-gray-400'
                     }`}>
                       {match.lastMessage}
                     </p>
@@ -68,7 +68,7 @@ const Matches = () => {
                       {formatTimestamp(match.timestamp)}
                     </span>
                     <MessageCircle className={`w-5 h-5 ${
-                      match.unread ? 'text-yellow-400' : 'text-gray-400'
+                      match.unread ? 'text-yellow-500' : 'text-gray-600'
                     }`} />
                   </div>
                 </div>
