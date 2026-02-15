@@ -564,6 +564,7 @@ const ProfileSetup = () => {
             onClick={handleBack}
             variant="outline"
             disabled={step === 1}
+            className="border-2 border-gray-600 text-white hover:bg-gray-800 hover:border-gray-500 disabled:opacity-30 disabled:cursor-not-allowed"
           >
             {t('back')}
           </Button>
@@ -571,14 +572,14 @@ const ProfileSetup = () => {
           {step < 6 ? (
             <Button
               onClick={handleNext}
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-pink-600 hover:to-rose-700"
+              className="bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-amber-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-semibold shadow-lg shadow-yellow-500/50"
             >
               {t('next')}
             </Button>
           ) : (
             <Button
               onClick={handleFinish}
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-pink-600 hover:to-rose-700"
+              className="bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 hover:from-amber-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-semibold shadow-lg shadow-yellow-500/50"
             >
               {t('finish')}
             </Button>
