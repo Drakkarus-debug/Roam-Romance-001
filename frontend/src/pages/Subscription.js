@@ -27,7 +27,7 @@ const Subscription = () => {
           <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
             {t('choosePlan')}
           </h1>
-          <p className="text-gray-300">Unlock premium features and find your perfect match</p>
+          <p className="text-gray-300">{t('unlockPremium')}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -48,7 +48,7 @@ const Subscription = () => {
                 <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${plan.color} flex items-center justify-center mb-4`}>
                   <Crown className="w-8 h-8 text-black" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2 text-yellow-400">{plan.name}</h2>
+                <h2 className="text-2xl font-bold mb-2 text-yellow-400">{t(plan.name)}</h2>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-bold text-gray-100">${plan.price}</span>
                   <span className="text-gray-400">{t('perMonth')}</span>
@@ -59,7 +59,7 @@ const Subscription = () => {
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">{feature}</span>
+                    <span className="text-sm text-gray-300">{t(feature)}</span>
                   </li>
                 ))}
               </ul>
@@ -69,7 +69,7 @@ const Subscription = () => {
                 onClick={() => handleSubscribe(plan.id)}
                 disabled={user?.subscription === plan.id}
               >
-                {user?.subscription === plan.id ? 'Current Plan' : t('subscribe')}
+                {user?.subscription === plan.id ? t('currentPlan') : t('subscribe')}
               </Button>
             </Card>
           ))}
@@ -81,7 +81,7 @@ const Subscription = () => {
             className="border-gray-600 text-gray-300 hover:bg-gray-800"
             onClick={() => navigate('/app/discover')}
           >
-            Continue with Free Plan
+            {t('continueFreePlan')}
           </Button>
         </div>
       </div>
