@@ -23,33 +23,61 @@ const Discover = () => {
   const [isDragging, setIsDragging] = useState(false);
   const cardRef = useRef(null);
 
-  // Sound effect URLs (we'll use Web Audio API to generate sounds)
   const playSound = (type) => {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
 
     if (type === 'win') {
-      // Winning slot machine sound - ascending tones
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.3);
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.5);
+      // Slot machine winning sound - cascading coin tones
+      const notes = [523, 659, 784, 1047];
+      notes.forEach((freq, i) => {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, audioContext.currentTime + i * 0.1);
+        gain.gain.setValueAtTime(0.15, audioContext.currentTime + i * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.1 + 0.15);
+        osc.start(audioContext.currentTime + i * 0.1);
+        osc.stop(audioContext.currentTime + i * 0.1 + 0.15);
+      });
+      // Final shimmer
+      const shimmer = audioContext.createOscillator();
+      const shimmerGain = audioContext.createGain();
+      shimmer.connect(shimmerGain);
+      shimmerGain.connect(audioContext.destination);
+      shimmer.type = 'sine';
+      shimmer.frequency.setValueAtTime(1200, audioContext.currentTime + 0.4);
+      shimmer.frequency.exponentialRampToValueAtTime(2400, audioContext.currentTime + 0.7);
+      shimmerGain.gain.setValueAtTime(0.1, audioContext.currentTime + 0.4);
+      shimmerGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      shimmer.start(audioContext.currentTime + 0.4);
+      shimmer.stop(audioContext.currentTime + 0.8);
     } else {
-      // Losing slot machine sound - descending tones
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.4);
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.5);
+      // Slot machine losing sound - descending "wah wah" buzzer
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(400, audioContext.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.6);
+      gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.7);
+      osc.start(audioContext.currentTime);
+      osc.stop(audioContext.currentTime + 0.7);
+      // Second lower tone
+      const osc2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      osc2.type = 'sawtooth';
+      osc2.frequency.setValueAtTime(200, audioContext.currentTime + 0.3);
+      osc2.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.7);
+      gain2.gain.setValueAtTime(0.1, audioContext.currentTime + 0.3);
+      gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+      osc2.start(audioContext.currentTime + 0.3);
+      osc2.stop(audioContext.currentTime + 0.8);
     }
   };
 
@@ -146,15 +174,26 @@ const Discover = () => {
   };
 
   useEffect(() => {
-    // Disable screenshots
+    // Disable screenshots - keyboard shortcuts
     const disableScreenshot = (e) => {
-      if (e.key === 'PrintScreen' || (e.metaKey && e.shiftKey && e.key === '3')) {
+      if (e.key === 'PrintScreen' || 
+          (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) ||
+          (e.ctrlKey && e.key === 'p') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'I')) {
         e.preventDefault();
-        alert('Screenshots are disabled');
       }
     };
+    // Disable right-click context menu
+    const disableContextMenu = (e) => e.preventDefault();
+    
+    document.addEventListener('keydown', disableScreenshot);
     document.addEventListener('keyup', disableScreenshot);
-    return () => document.removeEventListener('keyup', disableScreenshot);
+    document.addEventListener('contextmenu', disableContextMenu);
+    return () => {
+      document.removeEventListener('keydown', disableScreenshot);
+      document.removeEventListener('keyup', disableScreenshot);
+      document.removeEventListener('contextmenu', disableContextMenu);
+    };
   }, []);
 
   const currentProfile = profiles[currentIndex];
