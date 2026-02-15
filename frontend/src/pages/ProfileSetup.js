@@ -46,7 +46,9 @@ const ProfileSetup = () => {
     { value: 'marriageMinded', label: t('marriageMinded') },
     { value: 'hookups', label: t('hookups') },
     { value: 'friendship', label: t('friendship') },
-    { value: 'networking', label: t('networking') }
+    { value: 'networking', label: t('networking') },
+    ...(profileData.gender === 'female' ? [{ value: 'sugarbaby', label: t('sugarbaby') }] : []),
+    ...(profileData.gender === 'male' ? [{ value: 'sugardaddy', label: t('sugardaddy') }] : [])
   ];
 
   const handleNext = () => {
