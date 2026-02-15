@@ -1212,7 +1212,9 @@ export const translations = {
     shopping: 'Shopping',
     nature: 'Kalikasan',
     meditation: 'Meditasyon',
-    volunteering: 'Pagboboluntaryo'
+    volunteering: 'Pagboboluntaryo',
+    sugarbaby: 'Sugar Baby',
+    sugardaddy: 'Sugar Daddy'
   },
   am: {
     appName: 'Roam Romance',
