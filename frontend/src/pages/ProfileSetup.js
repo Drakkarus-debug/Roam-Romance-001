@@ -185,14 +185,14 @@ const ProfileSetup = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-center text-yellow-400">{t('age')}</h2>
             <div>
-              <Label>{t('age')}</Label>
+              <Label className="text-white">{t('age')}</Label>
               <Input
                 type="number"
                 min="18"
                 max="100"
                 value={profileData.age}
                 onChange={(e) => setProfileData({ ...profileData, age: e.target.value })}
-                className="text-lg"
+                className="text-lg bg-gray-900 border-gray-700 text-white"
               />
               {profileData.age && profileData.age < 18 && (
                 <p className="text-yellow-400 text-sm mt-2">{t('mustBe18')}</p>
