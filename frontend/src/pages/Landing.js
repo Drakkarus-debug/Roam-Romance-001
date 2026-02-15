@@ -76,9 +76,11 @@ const Landing = () => {
       <Card className="w-full max-w-md p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/50">
-              <Heart className="w-10 h-10 text-black fill-black" />
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_roam-dating-1/artifacts/c6dvvshx_ChatGPT%20Image%20Feb%2015%2C%202026%2C%2012_26_39%20PM.png"
+              alt="Roam Romance Logo"
+              className="w-32 h-32 object-contain"
+            />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent mb-2">
             {t('appName')}
