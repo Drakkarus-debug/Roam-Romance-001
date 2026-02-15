@@ -216,8 +216,8 @@ const ProfileSetup = () => {
                   htmlFor={race.value}
                   className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                     profileData.race === race.value
-                      ? 'border-pink-500 bg-pink-50'
-                      : 'border-gray-200 hover:border-pink-300'
+                      ? 'border-yellow-400 bg-yellow-500/10'
+                      : 'border-gray-200 hover:border-yellow-500/50'
                   }`}
                 >
                   <RadioGroupItem value={race.value} id={race.value} className="mr-3" />
@@ -272,8 +272,8 @@ const ProfileSetup = () => {
                     htmlFor={reason.value}
                     className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                       profileData.reason === reason.value
-                        ? 'border-pink-500 bg-pink-50'
-                        : 'border-gray-200 hover:border-pink-300'
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-200 hover:border-yellow-500/50'
                     }`}
                   >
                     <RadioGroupItem value={reason.value} id={reason.value} className="mr-3" />
@@ -307,8 +307,8 @@ const ProfileSetup = () => {
                     htmlFor={`${question.key}-yes`}
                     className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       profileData[question.key] === 'yes'
-                        ? 'border-pink-500 bg-pink-50'
-                        : 'border-gray-200 hover:border-pink-300'
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-200 hover:border-yellow-500/50'
                     }`}
                   >
                     <RadioGroupItem value="yes" id={`${question.key}-yes`} className="sr-only" />
@@ -318,8 +318,8 @@ const ProfileSetup = () => {
                     htmlFor={`${question.key}-no`}
                     className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       profileData[question.key] === 'no'
-                        ? 'border-pink-500 bg-pink-50'
-                        : 'border-gray-200 hover:border-pink-300'
+                        ? 'border-yellow-400 bg-yellow-500/10'
+                        : 'border-gray-200 hover:border-yellow-500/50'
                     }`}
                   >
                     <RadioGroupItem value="no" id={`${question.key}-no`} className="sr-only" />
@@ -385,7 +385,7 @@ const ProfileSetup = () => {
                   </div>
                 ))}
                 {profileData.photos.length < 6 && (
-                  <label className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-pink-500 transition-colors">
+                  <label className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-yellow-400 transition-colors">
                     <input
                       type="file"
                       accept="image/*"
@@ -413,14 +413,14 @@ const ProfileSetup = () => {
           {step < 6 ? (
             <Button
               onClick={handleNext}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700"
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-pink-600 hover:to-rose-700"
             >
               {t('next')}
             </Button>
           ) : (
             <Button
               onClick={handleFinish}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700"
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-pink-600 hover:to-rose-700"
             >
               {t('finish')}
             </Button>
