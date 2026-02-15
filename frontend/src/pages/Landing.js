@@ -124,7 +124,7 @@ const Landing = () => {
 
           {isLogin && (
             <div className="text-right">
-              <button type="button" className="text-sm text-pink-600 hover:text-pink-700">
+              <button type="button" className="text-sm text-yellow-400 hover:text-yellow-500">
                 {t('forgotPassword')}
               </button>
             </div>
@@ -132,7 +132,7 @@ const Landing = () => {
 
           <Button 
             type="submit" 
-            className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white"
+            className="w-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 hover:from-yellow-500 hover:via-amber-600 hover:to-yellow-700 text-black font-semibold shadow-lg shadow-yellow-500/50"
           >
             {isLogin ? t('login') : t('createAccount')}
           </Button>
@@ -140,10 +140,10 @@ const Landing = () => {
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+            <div className="w-full border-t border-gray-600"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">or</span>
+            <span className="px-2 bg-black text-gray-400">or</span>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ const Landing = () => {
           type="button"
           variant="outline"
           onClick={handleGoogleLogin}
-          className="w-full gap-2"
+          className="w-full gap-2 border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
