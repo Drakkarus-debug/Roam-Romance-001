@@ -294,18 +294,18 @@ const ProfileSetup = () => {
         {/* Step 5: Interests & Lifestyle */}
         {step === 5 && (
           <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2">
-            <h2 className="text-2xl font-bold text-center text-yellow-400">Interests & Lifestyle</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('interestsLifestyle')}</h2>
             
             {/* Interests */}
             <div>
-              <Label className="mb-3 block text-white text-lg">Select Your Interests (Choose at least 3)</Label>
+              <Label className="mb-3 block text-white text-lg">{t('selectInterests')}</Label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  'Travel', 'Photography', 'Music', 'Sports', 'Fitness', 'Yoga',
-                  'Cooking', 'Food', 'Wine', 'Coffee', 'Reading', 'Writing',
-                  'Art', 'Movies', 'Dancing', 'Gaming', 'Tech', 'Fashion',
-                  'Hiking', 'Beach', 'Camping', 'Skiing', 'Surfing', 'Pets',
-                  'Dogs', 'Cats', 'Shopping', 'Nature', 'Meditation', 'Volunteering'
+                  'travel', 'photography', 'music', 'sports', 'fitness', 'yoga',
+                  'cooking', 'food', 'wine', 'coffee', 'reading', 'writing',
+                  'art', 'movies', 'dancing', 'gaming', 'tech', 'fashion',
+                  'hiking', 'beach', 'camping', 'skiing', 'surfing', 'pets',
+                  'dogs', 'cats', 'shopping', 'nature', 'meditation', 'volunteering'
                 ].map((interest) => (
                   <button
                     key={interest}
@@ -330,7 +330,7 @@ const ProfileSetup = () => {
                         : 'border-gray-600 text-gray-300 hover:border-yellow-500/50'
                     }`}
                   >
-                    {interest}
+                    {t(interest)}
                   </button>
                 ))}
               </div>
@@ -338,7 +338,7 @@ const ProfileSetup = () => {
 
             {/* Drinking */}
             <div>
-              <Label className="mb-3 block text-white">{t('hasPets').replace('pets', 'drink')}Do you drink?</Label>
+              <Label className="mb-3 block text-white">{t('doYouDrink')}</Label>
               <RadioGroup
                 value={profileData.drinking}
                 onValueChange={(value) => setProfileData({ ...profileData, drinking: value })}
