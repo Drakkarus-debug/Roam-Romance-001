@@ -93,23 +93,23 @@ const Settings = () => {
                   htmlFor="female"
                   className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                     settings.showMe === 'female'
-                      ? 'border-yellow-500 bg-yellow-50'
-                      : 'border-gray-200 hover:border-pink-300'
+                      ? 'border-yellow-400 bg-yellow-500/10'
+                      : 'border-gray-600 hover:border-yellow-500/50'
                   }`}
                 >
                   <RadioGroupItem value="female" id="female" className="mr-3" />
-                  <span>{t('female')}</span>
+                  <span className="text-gray-200">{t('female')}</span>
                 </Label>
                 <Label
                   htmlFor="male"
                   className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
                     settings.showMe === 'male'
-                      ? 'border-yellow-500 bg-yellow-50'
-                      : 'border-gray-200 hover:border-pink-300'
+                      ? 'border-yellow-400 bg-yellow-500/10'
+                      : 'border-gray-600 hover:border-yellow-500/50'
                   }`}
                 >
                   <RadioGroupItem value="male" id="male" className="mr-3" />
-                  <span>{t('male')}</span>
+                  <span className="text-gray-200">{t('male')}</span>
                 </Label>
               </RadioGroup>
             </div>
@@ -117,8 +117,8 @@ const Settings = () => {
         </Card>
 
         {/* Language Settings */}
-        <Card className="p-6 mb-4">
-          <h2 className="text-xl font-semibold mb-4">Language</h2>
+        <Card className="p-6 mb-4 bg-black/90 border border-gray-700">
+          <h2 className="text-xl font-semibold mb-4 text-yellow-400">Language</h2>
           <div className="relative">
             <Button
               variant="outline"
