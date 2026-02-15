@@ -119,8 +119,8 @@ const ProfileSetup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl p-8 bg-white/80 backdrop-blur-sm shadow-xl">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4">
+      <Card className="w-full max-w-2xl p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between mb-2">
@@ -129,17 +129,17 @@ const ProfileSetup = () => {
                 key={s}
                 className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all ${
                   s <= step
-                    ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white'
-                    : 'bg-gray-200 text-gray-500'
+                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg shadow-yellow-500/50'
+                    : 'bg-gray-700 text-gray-400'
                 }`}
               >
                 {s}
               </div>
             ))}
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-pink-500 to-rose-600 transition-all duration-300"
+              className="h-full bg-gradient-to-r from-yellow-400 to-amber-500 transition-all duration-300"
               style={{ width: `${(step / 6) * 100}%` }}
             ></div>
           </div>
