@@ -148,7 +148,7 @@ const ProfileSetup = () => {
         {/* Step 1: Gender */}
         {step === 1 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('selectGender')}</h2>
+            <h2 className="text-2xl font-bold text-center text-yellow-400">{t('selectGender')}</h2>
             <RadioGroup
               value={profileData.gender}
               onValueChange={(value) => setProfileData({ ...profileData, gender: value })}
@@ -158,23 +158,23 @@ const ProfileSetup = () => {
                 htmlFor="male"
                 className={`flex items-center justify-center p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   profileData.gender === 'male'
-                    ? 'border-pink-500 bg-pink-50'
-                    : 'border-gray-200 hover:border-pink-300'
+                    ? 'border-yellow-400 bg-yellow-500/10'
+                    : 'border-gray-600 hover:border-yellow-500/50'
                 }`}
               >
                 <RadioGroupItem value="male" id="male" className="sr-only" />
-                <span className="text-xl font-semibold">{t('male')}</span>
+                <span className="text-xl font-semibold text-gray-200">{t('male')}</span>
               </Label>
               <Label
                 htmlFor="female"
                 className={`flex items-center justify-center p-6 border-2 rounded-lg cursor-pointer transition-all ${
                   profileData.gender === 'female'
-                    ? 'border-pink-500 bg-pink-50'
-                    : 'border-gray-200 hover:border-pink-300'
+                    ? 'border-yellow-400 bg-yellow-500/10'
+                    : 'border-gray-600 hover:border-yellow-500/50'
                 }`}
               >
                 <RadioGroupItem value="female" id="female" className="sr-only" />
-                <span className="text-xl font-semibold">{t('female')}</span>
+                <span className="text-xl font-semibold text-gray-200">{t('female')}</span>
               </Label>
             </RadioGroup>
           </div>
