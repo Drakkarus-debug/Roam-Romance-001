@@ -807,7 +807,9 @@ export const translations = {
     shopping: 'Compras',
     nature: 'Naturaleza',
     meditation: 'Meditación',
-    volunteering: 'Voluntariado'
+    volunteering: 'Voluntariado',
+    sugarbaby: 'Sugar Baby',
+    sugardaddy: 'Sugar Daddy'
   },
   zh: {
     appName: 'Roam Romance',
