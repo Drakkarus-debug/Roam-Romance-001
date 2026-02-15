@@ -339,32 +339,34 @@ const ProfileSetup = () => {
             <h2 className="text-2xl font-bold text-center text-yellow-400">{t('uploadPhotos')}</h2>
             
             <div>
-              <Label>{t('namePlaceholder')}</Label>
+              <Label className="text-white">{t('namePlaceholder')}</Label>
               <Input
                 type="text"
                 value={profileData.name}
                 onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
                 placeholder={t('namePlaceholder')}
+                className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
               />
             </div>
 
             <div>
-              <Label>{t('location')}</Label>
+              <Label className="text-white">{t('location')}</Label>
               <Input
                 type="text"
                 value={profileData.location}
                 onChange={(e) => setProfileData({ ...profileData, location: e.target.value })}
                 placeholder="City, State"
+                className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
               />
             </div>
 
             <div>
-              <Label>{t('about')}</Label>
+              <Label className="text-white">{t('about')}</Label>
               <textarea
                 value={profileData.bio}
                 onChange={(e) => setProfileData({ ...profileData, bio: e.target.value })}
                 placeholder={t('bioPlaceholder')}
-                className="w-full p-3 border rounded-lg resize-none h-24"
+                className="w-full p-3 border rounded-lg resize-none h-24 bg-gray-900 border-gray-700 text-white placeholder:text-gray-500"
               />
             </div>
 
