@@ -25,8 +25,8 @@ const Profile = () => {
     interests: user?.interests || [],
     details: {
       'Gender': user?.gender === 'male' ? t('male') : user?.gender === 'female' ? t('female') : 'Not set',
-      'Race': user?.race || 'Not set',
-      'Reason': user?.reason || 'Not set',
+      'Race': user?.race ? user.race.charAt(0).toUpperCase() + user.race.slice(1) : 'Not set',
+      'Reason': user?.reason ? user.reason.charAt(0).toUpperCase() + user.reason.slice(1).replace(/([A-Z])/g, ' $1').trim() : 'Not set',
       'Drinking': user?.drinking || 'Not set',
       'Smoking': user?.smokes || 'Not set',
       'Exercise': user?.exercise || 'Not set',
