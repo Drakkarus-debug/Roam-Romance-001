@@ -478,24 +478,30 @@ const ProfileSetup = () => {
 
             {/* Pets */}
             <div>
-              <Label className="mb-3 block text-white">Do you have pets?</Label>
+              <Label className="mb-3 block text-white">{t('hasPets')}</Label>
               <RadioGroup
                 value={profileData.hasPets}
                 onValueChange={(value) => setProfileData({ ...profileData, hasPets: value })}
                 className="grid grid-cols-3 gap-3"
               >
-                {['No', 'Dog', 'Cat', 'Both', 'Other'].map((option) => (
+                {[
+                  { value: 'No', label: t('no') },
+                  { value: 'Dog', label: t('dog') },
+                  { value: 'Cat', label: t('cat') },
+                  { value: 'Both', label: t('both') },
+                  { value: 'Other', label: t('other') }
+                ].map((option) => (
                   <Label
-                    key={option}
-                    htmlFor={`pets-${option}`}
+                    key={option.value}
+                    htmlFor={`pets-${option.value}`}
                     className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
-                      profileData.hasPets === option
+                      profileData.hasPets === option.value
                         ? 'border-yellow-400 bg-yellow-500/10'
                         : 'border-gray-600 hover:border-yellow-500/50'
                     }`}
                   >
-                    <RadioGroupItem value={option} id={`pets-${option}`} className="sr-only" />
-                    <span className="text-sm font-semibold text-white">{option}</span>
+                    <RadioGroupItem value={option.value} id={`pets-${option.value}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option.label}</span>
                   </Label>
                 ))}
               </RadioGroup>
@@ -509,18 +515,22 @@ const ProfileSetup = () => {
                 onValueChange={(value) => setProfileData({ ...profileData, hasKids: value })}
                 className="grid grid-cols-3 gap-3"
               >
-                {['No', 'Yes', 'Want someday'].map((option) => (
+                {[
+                  { value: 'No', label: t('no') },
+                  { value: 'Yes', label: t('yes') },
+                  { value: 'Want someday', label: t('wantsomeday') }
+                ].map((option) => (
                   <Label
-                    key={option}
-                    htmlFor={`kids-${option}`}
+                    key={option.value}
+                    htmlFor={`kids-${option.value}`}
                     className={`flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
-                      profileData.hasKids === option
+                      profileData.hasKids === option.value
                         ? 'border-yellow-400 bg-yellow-500/10'
                         : 'border-gray-600 hover:border-yellow-500/50'
                     }`}
                   >
-                    <RadioGroupItem value={option} id={`kids-${option}`} className="sr-only" />
-                    <span className="text-sm font-semibold text-white">{option}</span>
+                    <RadioGroupItem value={option.value} id={`kids-${option.value}`} className="sr-only" />
+                    <span className="text-sm font-semibold text-white">{option.label}</span>
                   </Label>
                 ))}
               </RadioGroup>
