@@ -424,7 +424,7 @@ const ProfileSetup = () => {
 
             {/* Exercise */}
             <div>
-              <Label className="mb-3 block text-white">Exercise Habits</Label>
+              <Label className="mb-3 block text-white">{t('exerciseHabits')}</Label>
               <RadioGroup
                 value={profileData.exercise}
                 onValueChange={(value) => setProfileData({ ...profileData, exercise: value })}
@@ -453,7 +453,7 @@ const ProfileSetup = () => {
 
             {/* Education */}
             <div>
-              <Label className="mb-3 block text-white">Education Level</Label>
+              <Label className="mb-3 block text-white">{t('educationLevel')}</Label>
               <RadioGroup
                 value={profileData.education}
                 onValueChange={(value) => setProfileData({ ...profileData, education: value })}
