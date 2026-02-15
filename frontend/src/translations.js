@@ -1482,6 +1482,8 @@ export const translations = {
     shopping: 'ምግዛእ',
     nature: 'ተፈጥሮ',
     meditation: 'ምሕሳብ',
-    volunteering: 'ፈቓድነት'
+    volunteering: 'ፈቓድነት',
+    sugarbaby: 'ሹጋር ቤቢ',
+    sugardaddy: 'ሹጋር ዳዲ'
   }
 };
