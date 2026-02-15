@@ -183,7 +183,7 @@ const Discover = () => {
       <div className="flex items-center justify-center h-full px-4 py-8">
         <div className="w-full max-w-md relative">
           {/* Swipe Hints */}
-          <div className="flex justify-between mb-4 text-sm text-gray-500">
+          <div className="flex justify-between mb-4 text-sm text-gray-400">
             <span>{t('swipeLeft')}</span>
             <span>{t('swipeRight')}</span>
           </div>
