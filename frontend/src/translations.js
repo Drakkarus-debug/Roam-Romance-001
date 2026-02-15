@@ -132,7 +132,9 @@ export const translations = {
     shopping: 'Shopping',
     nature: 'Nature',
     meditation: 'Meditation',
-    volunteering: 'Volunteering'
+    volunteering: 'Volunteering',
+    sugarbaby: 'Sugar Baby',
+    sugardaddy: 'Sugar Daddy'
   },
   fr: {
     appName: 'Roam Romance',
