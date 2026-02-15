@@ -55,14 +55,14 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4">
       {/* Language Selector Button */}
       <div className="fixed top-4 right-4 z-50">
         <Button
           variant="outline"
           size="sm"
           onClick={() => setShowLanguageSelector(!showLanguageSelector)}
-          className="gap-2 bg-white/80 backdrop-blur-sm hover:bg-white"
+          className="gap-2 bg-black/80 backdrop-blur-sm hover:bg-black border-yellow-500 text-yellow-500"
         >
           <Globe className="w-4 h-4" />
         </Button>
@@ -73,17 +73,17 @@ const Landing = () => {
         )}
       </div>
 
-      <Card className="w-full max-w-md p-8 bg-white/80 backdrop-blur-sm shadow-xl">
+      <Card className="w-full max-w-md p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center">
-              <Heart className="w-10 h-10 text-white fill-white" />
+            <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/50">
+              <Heart className="w-10 h-10 text-black fill-black" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 bg-clip-text text-transparent mb-2">
             {t('appName')}
           </h1>
-          <p className="text-gray-600">{t('welcome')}</p>
+          <p className="text-gray-300">{t('welcome')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
