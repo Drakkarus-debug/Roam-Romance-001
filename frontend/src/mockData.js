@@ -96,46 +96,46 @@ export const mockUsers = [
 export const subscriptionPlans = [
   {
     id: 'plus',
-    name: 'Roam Plus',
+    name: 'roamPlus',
     price: 1.99,
     color: 'from-pink-500 to-rose-500',
     features: [
-      'Match, chat & connect with other users',
-      'Send unlimited daily Likes',
-      'Unlimited Rewinds - take back your last Like or Nope',
-      'Roaming Love Mode - chat with users in any country/destination',
-      'Hide advertisements - enjoy an ad-free experience',
-      'Go incognito - hide your profile at anytime',
-      'Add your national flag to your profile'
+      'feature1',
+      'feature2',
+      'feature3',
+      'feature4',
+      'feature5',
+      'feature6',
+      'feature7'
     ]
   },
   {
     id: 'gold',
-    name: 'Roam Gold',
+    name: 'roamGold',
     price: 10.99,
     color: 'from-yellow-400 to-amber-500',
     features: [
-      'All Roam Plus features',
-      'Weekly Super Likes - prioritize your profile',
-      '1 Boost per month - become a top profile for 30 minutes',
-      'See who Likes You before you decide',
-      'New Top Picks every day - most vibe-worthy matches highlighted',
-      'Priority customer support'
+      'feature8',
+      'feature9',
+      'feature10',
+      'feature11',
+      'feature12',
+      'feature13'
     ],
     popular: true
   },
   {
     id: 'platinum',
-    name: 'Roam Platinum',
+    name: 'roamPlatinum',
     price: 20.99,
     color: 'from-purple-500 to-indigo-500',
     features: [
-      'All Roam Plus and Gold features',
-      'Weekly First Impressions - stand out to your interests',
-      'Prioritized Likes - your Likes seen faster',
-      'See the Likes you\'ve sent in the last 7 days',
-      'Unlimited Super Likes',
-      'VIP customer support'
+      'feature14',
+      'feature15',
+      'feature16',
+      'feature17',
+      'feature18',
+      'feature19'
     ]
   }
 ];
