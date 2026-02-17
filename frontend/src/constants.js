@@ -20,7 +20,7 @@ export const COLORS = {
 };
 
 export const BG_IMAGE = 'https://customer-assets.emergentagent.com/job_78741d56-7120-4b1e-bb03-8c74389f498e/artifacts/d3k1x2rz_ChatGPT%20Image%20Feb%2017%2C%202026%2C%2009_31_28%20PM.png';
-export const LOGO_IMAGE = 'https://customer-assets.emergentagent.com/job_roam-dating-1/artifacts/c6dvvshx_ChatGPT%20Image%20Feb%2015%2C%202026%2C%2012_26_39%20PM.png';
+export const LOGO_IMAGE = 'https://customer-assets.emergentagent.com/job_78741d56-7120-4b1e-bb03-8c74389f498e/artifacts/5nqsisib_1000057689.png';
 
 export const API_URL = typeof process !== 'undefined' && process.env && process.env.REACT_APP_BACKEND_URL
   ? process.env.REACT_APP_BACKEND_URL
