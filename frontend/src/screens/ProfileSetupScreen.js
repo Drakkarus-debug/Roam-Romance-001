@@ -219,4 +219,10 @@ const s = StyleSheet.create({
   backText: { color: '#fff', fontWeight: '600' },
   nextBtn: { backgroundColor: COLORS.gold, borderRadius: 8, paddingVertical: 12, paddingHorizontal: 32 },
   nextText: { color: '#000', fontWeight: 'bold', fontSize: 16 },
+  photoGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 16 },
+  photoWrapper: { width: 100, height: 130, borderRadius: 12, overflow: 'hidden', position: 'relative' },
+  photoThumb: { width: '100%', height: '100%', borderRadius: 12 },
+  removePhotoBtn: { position: 'absolute', top: 4, right: 4, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 12 },
+  addPhotoBtn: { width: 100, height: 130, borderRadius: 12, borderWidth: 2, borderColor: COLORS.gray600, borderStyle: 'dashed', alignItems: 'center', justifyContent: 'center' },
+  addPhotoText: { color: COLORS.gray400, fontSize: 11, marginTop: 4 },
 });
