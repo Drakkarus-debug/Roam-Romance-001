@@ -143,7 +143,7 @@ const s = StyleSheet.create({
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
   cardArea: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  card: { width: SCREEN_WIDTH - 40, height: '90%', borderRadius: 16, overflow: 'hidden', backgroundColor: '#222' },
+  card: { width: SCREEN_WIDTH - 40, height: 480, borderRadius: 16, overflow: 'hidden', backgroundColor: '#222' },
   photo: { width: '100%', height: '100%', position: 'absolute' },
   gradient: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.001)' },
   badge: { position: 'absolute', top: 40, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3 },
