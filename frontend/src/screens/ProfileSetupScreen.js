@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, TextInput, Image, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { COLORS, BG_IMAGE } from '../constants';
@@ -10,10 +12,32 @@ export default function ProfileSetupScreen() {
   const { t } = useLanguage();
   const { updateUser } = useAuth();
   const [step, setStep] = useState(0);
-  const [data, setData] = useState({ gender: '', age: '', race: '', reason: '', weightKg: '', weightLbs: '', name: '', bio: '', interests: [], drinking: '', smokes: '', exercise: '', education: '', hasPets: '', hasKids: '', criminalRecord: '' });
+  const [data, setData] = useState({ gender: '', age: '', race: '', reason: '', weightKg: '', weightLbs: '', name: '', bio: '', interests: [], drinking: '', smokes: '', exercise: '', education: '', hasPets: '', hasKids: '', criminalRecord: '', photos: [] });
 
   const set = (key, val) => setData(prev => ({ ...prev, [key]: val }));
   const toggleInterest = (i) => set('interests', data.interests.includes(i) ? data.interests.filter(x => x !== i) : [...data.interests, i]);
+
+  const pickImage = async () => {
+    if (data.photos.length >= 6) return;
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permission to access photos is required.');
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [3, 4],
+      quality: 0.7,
+    });
+    if (!result.canceled && result.assets?.[0]?.uri) {
+      set('photos', [...data.photos, result.assets[0].uri]);
+    }
+  };
+
+  const removePhoto = (index) => {
+    set('photos', data.photos.filter((_, i) => i !== index));
+  };
 
   const convertKg = (v) => { set('weightKg', v); set('weightLbs', v ? String(Math.round(parseFloat(v) * 2.20462)) : ''); };
   const convertLbs = (v) => { set('weightLbs', v); set('weightKg', v ? String(Math.round(parseFloat(v) / 2.20462)) : ''); };
