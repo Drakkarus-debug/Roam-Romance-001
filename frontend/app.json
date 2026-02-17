@@ -20,7 +20,7 @@
       "package": "com.roamromance.app"
     },
     "web": {
-      "bundler": "webpack",
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
     "platforms": ["ios", "android", "web"]
