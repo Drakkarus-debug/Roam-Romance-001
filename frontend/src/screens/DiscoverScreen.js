@@ -124,19 +124,18 @@ export default function DiscoverScreen({ navigation }) {
               style={[s.card, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]}
               {...panResponder.panHandlers}
             >
-              <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} />
-              <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
-                <Text style={s.badgeText}>LIKE</Text>
-              </Animated.View>
-              <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}>
-                <Text style={s.badgeText}>NOPE</Text>
-              </Animated.View>
+              <View style={s.photoContainer}>
+                <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} resizeMode="cover" />
+                <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
+                  <Text style={s.badgeText}>LIKE</Text>
+                </Animated.View>
+                <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}>
+                  <Text style={s.badgeText}>NOPE</Text>
+                </Animated.View>
+              </View>
               <View style={s.info}>
                 <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
-                <View style={s.distRow}>
-                  <Ionicons name="location" size={14} color="#fff" />
-                  <Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text>
-                </View>
+                <Text style={s.distText}><Ionicons name="location" size={13} color={COLORS.gray400} /> {currentProfile.distance} {t('miles')} {t('away')}</Text>
                 <Text style={s.bio} numberOfLines={2}>{currentProfile.bio}</Text>
                 <View style={s.tags}>
                   {currentProfile.interests.map((interest, idx) => (
@@ -196,17 +195,18 @@ const s = StyleSheet.create({
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
   cardArea: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  card: { width: SCREEN_WIDTH - 40, height: 520, borderRadius: 16, overflow: 'hidden', backgroundColor: '#111' },
-  photo: { width: '100%', height: 320 },
-  badge: { position: 'absolute', top: 40, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
+  card: { width: SCREEN_WIDTH - 40, borderRadius: 16, overflow: 'hidden', backgroundColor: '#111' },
+  photoContainer: { width: '100%', height: 340, position: 'relative' },
+  photo: { width: '100%', height: '100%' },
+  badge: { position: 'absolute', top: 30, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
   likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.3)' },
   nopeBadge: { left: 20, borderColor: COLORS.red, backgroundColor: 'rgba(239,68,68,0.3)' },
   badgeText: { fontSize: 28, fontWeight: 'bold', color: '#fff' },
-  info: { padding: 16, backgroundColor: 'rgba(0,0,0,0.85)', minHeight: 140 },
-  name: { fontSize: 24, fontWeight: 'bold', color: '#fff' },
-  distRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4 },
-  distText: { color: '#ddd', fontSize: 13 },
-  bio: { color: '#ccc', fontSize: 14, marginTop: 8 },
+  info: { padding: 14, backgroundColor: '#111' },
+  name: { fontSize: 22, fontWeight: 'bold', color: '#ffffff' },
+  distRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 },
+  distText: { color: '#aaaaaa', fontSize: 13, marginTop: 2 },
+  bio: { color: '#cccccc', fontSize: 13, marginTop: 6 },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   tag: { backgroundColor: 'rgba(255,255,255,0.2)', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 20 },
   tagText: { color: '#fff', fontSize: 12 },
