@@ -5,7 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { mockMatches } from '../mockData';
 import { COLORS, BG_IMAGE } from '../constants';
 
-export default function MatchesScreen() {
+export default function MatchesScreen({ navigation }) {
   const { t } = useLanguage();
 
   return (
@@ -43,7 +43,10 @@ const s = StyleSheet.create({
   bg: { flex: 1 },
   overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.55)' },
   container: { flex: 1, paddingTop: 60, paddingHorizontal: 16, zIndex: 1 },
-  title: { fontSize: 28, fontWeight: 'bold', color: COLORS.gold, marginBottom: 20 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
+  title: { fontSize: 28, fontWeight: 'bold', color: COLORS.gold },
+  upgradeBtn: { backgroundColor: COLORS.gold, paddingVertical: 8, paddingHorizontal: 16, borderRadius: 8 },
+  upgradeBtnText: { color: '#000', fontWeight: 'bold', fontSize: 13 },
   matchItem: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', padding: 14, borderRadius: 12, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(234,179,8,0.15)' },
   avatar: { width: 56, height: 56, borderRadius: 28, borderWidth: 2, borderColor: COLORS.gold },
   matchInfo: { flex: 1, marginLeft: 14 },
