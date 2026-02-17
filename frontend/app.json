@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Roam Romance",
+    "slug": "roam-romance",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.roamromance.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#000000"
+      },
+      "package": "com.roamromance.app"
+    },
+    "web": {
+      "bundler": "webpack",
+      "favicon": "./assets/favicon.png"
+    },
+    "platforms": ["ios", "android", "web"]
+  }
+}
