@@ -156,13 +156,13 @@ export default function DiscoverScreen({ navigation }) {
         </View>
 
         <View style={s.actions}>
-          <TouchableOpacity style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && advanceCard('left')}>
+          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-left" style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && advanceCard('left')}>
             <Ionicons name="close" size={32} color={COLORS.red} />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => {}}>
             <Ionicons name="star" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && advanceCard('right')}>
+          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-right" style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && advanceCard('right')}>
             <Ionicons name="heart" size={28} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.purple }]} onPress={() => {}}>
