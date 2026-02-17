@@ -12,7 +12,12 @@ export default function MatchesScreen() {
     <ImageBackground source={{ uri: BG_IMAGE }} style={s.bg} resizeMode="cover">
       <View style={s.overlay} />
       <View style={s.container}>
-        <Text style={s.title}>{t('matches')}</Text>
+        <View style={s.header}>
+          <Text style={s.title}>{t('matches')}</Text>
+          <TouchableOpacity style={s.upgradeBtn} onPress={() => navigation?.navigate?.('Subscription')}>
+            <Text style={s.upgradeBtnText}>{t('upgradeNow')}</Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           data={mockMatches}
           keyExtractor={(item) => item.id}
