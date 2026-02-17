@@ -125,25 +125,23 @@ export default function DiscoverScreen({ navigation }) {
               {...panResponder.panHandlers}
             >
               <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} />
-              <View style={s.gradient}>
-                <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
-                  <Text style={s.badgeText}>LIKE</Text>
-                </Animated.View>
-                <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}>
-                  <Text style={s.badgeText}>NOPE</Text>
-                </Animated.View>
-                <View style={s.info}>
-                  <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
-                  <View style={s.distRow}>
-                    <Ionicons name="location" size={14} color="#fff" />
-                    <Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text>
-                  </View>
-                  <Text style={s.bio}>{currentProfile.bio}</Text>
-                  <View style={s.tags}>
-                    {currentProfile.interests.map((interest, idx) => (
-                      <View key={idx} style={s.tag}><Text style={s.tagText}>{interest}</Text></View>
-                    ))}
-                  </View>
+              <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
+                <Text style={s.badgeText}>LIKE</Text>
+              </Animated.View>
+              <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}>
+                <Text style={s.badgeText}>NOPE</Text>
+              </Animated.View>
+              <View style={s.info}>
+                <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
+                <View style={s.distRow}>
+                  <Ionicons name="location" size={14} color="#fff" />
+                  <Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text>
+                </View>
+                <Text style={s.bio} numberOfLines={2}>{currentProfile.bio}</Text>
+                <View style={s.tags}>
+                  {currentProfile.interests.map((interest, idx) => (
+                    <View key={idx} style={s.tag}><Text style={s.tagText}>{interest}</Text></View>
+                  ))}
                 </View>
               </View>
             </Animated.View>
@@ -198,10 +196,9 @@ const s = StyleSheet.create({
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
   cardArea: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  card: { width: SCREEN_WIDTH - 40, height: 520, borderRadius: 16, overflow: 'hidden', backgroundColor: '#222' },
-  photo: { width: '100%', height: '65%', position: 'absolute', top: 0 },
-  gradient: { flex: 1, justifyContent: 'flex-end' },
-  badge: { position: 'absolute', top: 40, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3 },
+  card: { width: SCREEN_WIDTH - 40, height: 520, borderRadius: 16, overflow: 'hidden', backgroundColor: '#111' },
+  photo: { width: '100%', height: 320 },
+  badge: { position: 'absolute', top: 40, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
   likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.3)' },
   nopeBadge: { left: 20, borderColor: COLORS.red, backgroundColor: 'rgba(239,68,68,0.3)' },
   badgeText: { fontSize: 28, fontWeight: 'bold', color: '#fff' },
