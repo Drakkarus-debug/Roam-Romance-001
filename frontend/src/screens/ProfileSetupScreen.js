@@ -145,10 +145,30 @@ export default function ProfileSetupScreen() {
             </View>
           )}
 
-          {/* Step 5: Name & Bio */}
+          {/* Step 5: Photos, Name & Bio */}
           {step === 5 && (
             <View style={s.stepContent}>
               <Text style={s.stepTitle}>{t('uploadPhotos')}</Text>
+
+              {/* Photo Grid */}
+              <Text style={s.label}>{t('myPhotos') || 'My Photos'} ({data.photos.length}/6)</Text>
+              <View style={s.photoGrid}>
+                {data.photos.map((uri, index) => (
+                  <View key={index} style={s.photoWrapper}>
+                    <Image source={{ uri }} style={s.photoThumb} />
+                    <TouchableOpacity style={s.removePhotoBtn} onPress={() => removePhoto(index)}>
+                      <Ionicons name="close-circle" size={24} color={COLORS.red} />
+                    </TouchableOpacity>
+                  </View>
+                ))}
+                {data.photos.length < 6 && (
+                  <TouchableOpacity style={s.addPhotoBtn} onPress={pickImage}>
+                    <Ionicons name="camera-outline" size={32} color={COLORS.gray400} />
+                    <Text style={s.addPhotoText}>{t('addPhoto') || 'Add Photo'}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
               <Text style={s.label}>{t('namePlaceholder')}</Text>
               <TextInput style={s.input} value={data.name} onChangeText={(v) => set('name', v)} placeholder={t('namePlaceholder')} placeholderTextColor={COLORS.gray600} />
               <Text style={s.label}>{t('about')}</Text>
