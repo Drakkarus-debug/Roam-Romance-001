@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, Animated, PanResponder, TouchableOpacity, Dimensions, Platform } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, Animated, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,7 +7,7 @@ import { mockUsers } from '../mockData';
 import { COLORS, BG_IMAGE } from '../constants';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
+const SWIPE_THRESHOLD = 80;
 
 export default function DiscoverScreen({ navigation }) {
   const { t } = useLanguage();
@@ -15,8 +15,10 @@ export default function DiscoverScreen({ navigation }) {
   const [profiles] = useState([...mockUsers]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [matchUser, setMatchUser] = useState(null);
-  const position = useRef(new Animated.ValueXY()).current;
+  const posX = useRef(new Animated.Value(0)).current;
+  const posY = useRef(new Animated.Value(0)).current;
   const currentIndexRef = useRef(0);
+  const dragRef = useRef({ startX: 0, startY: 0, dragging: false });
 
   const playSound = useCallback((type) => {
     if (Platform.OS === 'web') {
@@ -44,69 +46,80 @@ export default function DiscoverScreen({ navigation }) {
     }
   }, []);
 
-  const advanceCard = useCallback((direction) => {
+  const completeSwipe = useCallback((direction) => {
     const idx = currentIndexRef.current;
     if (idx >= profiles.length) return;
-
     if (direction === 'right') {
       playSound('win');
-      if (Math.random() > 0.7) {
-        setMatchUser(profiles[idx]);
-      }
+      if (Math.random() > 0.7) setMatchUser(profiles[idx]);
     } else {
       playSound('lose');
     }
-
     const toX = direction === 'right' ? SCREEN_WIDTH + 100 : -SCREEN_WIDTH - 100;
-    Animated.timing(position, { toValue: { x: toX, y: 0 }, duration: 250, useNativeDriver: false }).start(() => {
+    Animated.timing(posX, { toValue: toX, duration: 250, useNativeDriver: false }).start(() => {
       currentIndexRef.current = idx + 1;
       setCurrentIndex(idx + 1);
-      position.setValue({ x: 0, y: 0 });
+      posX.setValue(0);
+      posY.setValue(0);
     });
-  }, [profiles, playSound, position]);
+  }, [profiles, playSound, posX, posY]);
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dx) > 5,
-      onPanResponderGrant: () => {
-        position.setOffset({ x: position.x._value, y: position.y._value });
-        position.setValue({ x: 0, y: 0 });
-      },
-      onPanResponderMove: Animated.event([null, { dx: position.x, dy: position.y }], { useNativeDriver: false }),
-      onPanResponderRelease: (_, gesture) => {
-        position.flattenOffset();
-        if (gesture.dx > SWIPE_THRESHOLD) {
-          const idx = currentIndexRef.current;
-          if (idx < profiles.length) {
-            playSound('win');
-            if (Math.random() > 0.7) setMatchUser(profiles[idx]);
-          }
-          Animated.timing(position, { toValue: { x: SCREEN_WIDTH + 100, y: gesture.dy }, duration: 200, useNativeDriver: false }).start(() => {
-            currentIndexRef.current += 1;
-            setCurrentIndex(currentIndexRef.current);
-            position.setValue({ x: 0, y: 0 });
-          });
-        } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          const idx = currentIndexRef.current;
-          if (idx < profiles.length) playSound('lose');
-          Animated.timing(position, { toValue: { x: -SCREEN_WIDTH - 100, y: gesture.dy }, duration: 200, useNativeDriver: false }).start(() => {
-            currentIndexRef.current += 1;
-            setCurrentIndex(currentIndexRef.current);
-            position.setValue({ x: 0, y: 0 });
-          });
-        } else {
-          Animated.spring(position, { toValue: { x: 0, y: 0 }, friction: 5, useNativeDriver: false }).start();
-        }
-      },
-    })
-  ).current;
+  // Gesture handlers that work on both web and native
+  const getXY = (e) => {
+    if (e.nativeEvent?.touches?.length > 0) {
+      return { x: e.nativeEvent.touches[0].pageX, y: e.nativeEvent.touches[0].pageY };
+    }
+    return { x: e.nativeEvent?.pageX || 0, y: e.nativeEvent?.pageY || 0 };
+  };
 
-  const rotate = position.x.interpolate({ inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH], outputRange: ['-12deg', '0deg', '12deg'] });
-  const likeOpacity = position.x.interpolate({ inputRange: [0, SCREEN_WIDTH / 4], outputRange: [0, 1], extrapolate: 'clamp' });
-  const nopeOpacity = position.x.interpolate({ inputRange: [-SCREEN_WIDTH / 4, 0], outputRange: [1, 0], extrapolate: 'clamp' });
+  const onGestureStart = (e) => {
+    const { x, y } = getXY(e);
+    dragRef.current = { startX: x, startY: y, dragging: true };
+  };
+
+  const onGestureMove = (e) => {
+    if (!dragRef.current.dragging) return;
+    const { x, y } = getXY(e);
+    const dx = x - dragRef.current.startX;
+    const dy = y - dragRef.current.startY;
+    posX.setValue(dx);
+    posY.setValue(dy);
+  };
+
+  const onGestureEnd = () => {
+    if (!dragRef.current.dragging) return;
+    dragRef.current.dragging = false;
+    const currentDx = posX._value;
+    if (currentDx > SWIPE_THRESHOLD) {
+      completeSwipe('right');
+    } else if (currentDx < -SWIPE_THRESHOLD) {
+      completeSwipe('left');
+    } else {
+      Animated.spring(posX, { toValue: 0, friction: 5, useNativeDriver: false }).start();
+      Animated.spring(posY, { toValue: 0, friction: 5, useNativeDriver: false }).start();
+    }
+  };
+
+  const rotate = posX.interpolate({ inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH], outputRange: ['-12deg', '0deg', '12deg'] });
+  const likeOpacity = posX.interpolate({ inputRange: [0, SCREEN_WIDTH / 4], outputRange: [0, 1], extrapolate: 'clamp' });
+  const nopeOpacity = posX.interpolate({ inputRange: [-SCREEN_WIDTH / 4, 0], outputRange: [1, 0], extrapolate: 'clamp' });
 
   const currentProfile = profiles[currentIndex];
+
+  // Web-specific event props for the card
+  const gestureProps = Platform.OS === 'web' ? {
+    onMouseDown: onGestureStart,
+    onMouseMove: onGestureMove,
+    onMouseUp: onGestureEnd,
+    onMouseLeave: onGestureEnd,
+    onTouchStart: onGestureStart,
+    onTouchMove: onGestureMove,
+    onTouchEnd: onGestureEnd,
+  } : {
+    onTouchStart: onGestureStart,
+    onTouchMove: onGestureMove,
+    onTouchEnd: onGestureEnd,
+  };
 
   return (
     <ImageBackground source={{ uri: BG_IMAGE }} style={s.bg} resizeMode="cover">
@@ -122,8 +135,8 @@ export default function DiscoverScreen({ navigation }) {
             <View>
               <Animated.View
                 key={currentIndex}
-                style={[s.card, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]}
-                {...panResponder.panHandlers}
+                style={[s.card, { transform: [{ translateX: posX }, { translateY: posY }, { rotate }], cursor: 'grab' }]}
+                {...gestureProps}
               >
                 <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} resizeMode="cover" />
                 <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
@@ -153,13 +166,13 @@ export default function DiscoverScreen({ navigation }) {
         </View>
 
         <View style={s.actions}>
-          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-left" style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && advanceCard('left')}>
+          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-left" style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && completeSwipe('left')}>
             <Ionicons name="close" size={32} color={COLORS.red} />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => {}}>
             <Ionicons name="star" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-right" style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && advanceCard('right')}>
+          <TouchableOpacity accessibilityRole="button" accessibilityLabel="swipe-right" style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && completeSwipe('right')}>
             <Ionicons name="heart" size={28} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.purple }]} onPress={() => {}}>
@@ -168,7 +181,6 @@ export default function DiscoverScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Match Modal */}
       {matchUser && (
         <View style={s.matchOverlay}>
           <View style={s.matchCard}>
@@ -195,8 +207,7 @@ const s = StyleSheet.create({
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
   cardArea: { flex: 1, paddingHorizontal: 20, paddingTop: 4 },
-  card: { width: '100%', height: 320, borderTopLeftRadius: 16, borderTopRightRadius: 16, overflow: 'hidden', backgroundColor: '#111' },
-  photoContainer: { width: '100%', height: 340, position: 'relative' },
+  card: { width: '100%', height: 320, borderTopLeftRadius: 16, borderTopRightRadius: 16, overflow: 'hidden', backgroundColor: '#111', userSelect: 'none' },
   photo: { width: '100%', height: '100%' },
   badge: { position: 'absolute', top: 30, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
   likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.3)' },
@@ -204,11 +215,10 @@ const s = StyleSheet.create({
   badgeText: { fontSize: 28, fontWeight: 'bold', color: '#fff' },
   info: { paddingHorizontal: 14, paddingVertical: 10, backgroundColor: '#111', borderBottomLeftRadius: 16, borderBottomRightRadius: 16 },
   name: { fontSize: 22, fontWeight: 'bold', color: '#ffffff' },
-  distRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 },
   distText: { color: '#aaaaaa', fontSize: 13, marginTop: 2 },
   bio: { color: '#cccccc', fontSize: 13, marginTop: 6 },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
-  tag: { backgroundColor: 'rgba(255,255,255,0.2)', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 20 },
+  tag: { backgroundColor: 'rgba(255,255,255,0.15)', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 20 },
   tagText: { color: '#fff', fontSize: 12 },
   empty: { alignItems: 'center', padding: 40 },
   emptyTitle: { color: COLORS.gold, fontSize: 22, fontWeight: 'bold', marginBottom: 8 },
