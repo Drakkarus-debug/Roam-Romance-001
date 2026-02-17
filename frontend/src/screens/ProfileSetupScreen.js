@@ -84,8 +84,21 @@ export default function ProfileSetupScreen() {
           {step === 1 && (
             <View style={s.stepContent}>
               <Text style={s.stepTitle}>{t('age')}</Text>
-              <TextInput style={s.input} keyboardType="numeric" value={data.age} onChangeText={(v) => set('age', v)} placeholder="18+" placeholderTextColor={COLORS.gray600} />
-              {data.age && parseInt(data.age) < 18 && <Text style={s.warn}>{t('mustBe18')}</Text>}
+              <TextInput
+                style={s.input}
+                keyboardType="numeric"
+                value={data.age}
+                onChangeText={(v) => {
+                  const cleaned = v.replace(/[^0-9]/g, '');
+                  const num = parseInt(cleaned);
+                  if (cleaned === '' || (num >= 0 && num <= 115)) set('age', cleaned);
+                }}
+                placeholder="18-115"
+                placeholderTextColor={COLORS.gray600}
+                maxLength={3}
+              />
+              {data.age !== '' && parseInt(data.age) < 18 && <Text style={s.warn}>{t('mustBe18')}</Text>}
+              {data.age !== '' && parseInt(data.age) > 115 && <Text style={s.warn}>Maximum age is 115</Text>}
             </View>
           )}
 

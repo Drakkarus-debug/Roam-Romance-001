@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, Animated, PanResponder, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -7,7 +7,7 @@ import { mockUsers } from '../mockData';
 import { COLORS, BG_IMAGE } from '../constants';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25;
+const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
 
 export default function DiscoverScreen({ navigation }) {
   const { t } = useLanguage();
@@ -16,8 +16,9 @@ export default function DiscoverScreen({ navigation }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [matchUser, setMatchUser] = useState(null);
   const position = useRef(new Animated.ValueXY()).current;
+  const currentIndexRef = useRef(0);
 
-  const playSound = (type) => {
+  const playSound = useCallback((type) => {
     if (Platform.OS === 'web') {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -41,35 +42,67 @@ export default function DiscoverScreen({ navigation }) {
         }
       } catch (e) {}
     }
-  };
+  }, []);
 
-  const handleSwipe = (direction) => {
-    const toValue = direction === 'right' ? SCREEN_WIDTH + 100 : -SCREEN_WIDTH - 100;
+  const advanceCard = useCallback((direction) => {
+    const idx = currentIndexRef.current;
+    if (idx >= profiles.length) return;
+
     if (direction === 'right') {
       playSound('win');
       if (Math.random() > 0.7) {
-        setMatchUser(profiles[currentIndex]);
+        setMatchUser(profiles[idx]);
       }
     } else {
       playSound('lose');
     }
-    Animated.spring(position, { toValue: { x: toValue, y: 0 }, useNativeDriver: false }).start(() => {
-      setCurrentIndex(prev => prev + 1);
+
+    const toX = direction === 'right' ? SCREEN_WIDTH + 100 : -SCREEN_WIDTH - 100;
+    Animated.timing(position, { toValue: { x: toX, y: 0 }, duration: 250, useNativeDriver: false }).start(() => {
+      currentIndexRef.current = idx + 1;
+      setCurrentIndex(idx + 1);
       position.setValue({ x: 0, y: 0 });
     });
-  };
+  }, [profiles, playSound, position]);
 
-  const panResponder = useRef(PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: (_, gesture) => { position.setValue({ x: gesture.dx, y: gesture.dy }); },
-    onPanResponderRelease: (_, gesture) => {
-      if (gesture.dx > SWIPE_THRESHOLD) handleSwipe('right');
-      else if (gesture.dx < -SWIPE_THRESHOLD) handleSwipe('left');
-      else Animated.spring(position, { toValue: { x: 0, y: 0 }, useNativeDriver: false }).start();
-    },
-  })).current;
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dx) > 5,
+      onPanResponderGrant: () => {
+        position.setOffset({ x: position.x._value, y: position.y._value });
+        position.setValue({ x: 0, y: 0 });
+      },
+      onPanResponderMove: Animated.event([null, { dx: position.x, dy: position.y }], { useNativeDriver: false }),
+      onPanResponderRelease: (_, gesture) => {
+        position.flattenOffset();
+        if (gesture.dx > SWIPE_THRESHOLD) {
+          const idx = currentIndexRef.current;
+          if (idx < profiles.length) {
+            playSound('win');
+            if (Math.random() > 0.7) setMatchUser(profiles[idx]);
+          }
+          Animated.timing(position, { toValue: { x: SCREEN_WIDTH + 100, y: gesture.dy }, duration: 200, useNativeDriver: false }).start(() => {
+            currentIndexRef.current += 1;
+            setCurrentIndex(currentIndexRef.current);
+            position.setValue({ x: 0, y: 0 });
+          });
+        } else if (gesture.dx < -SWIPE_THRESHOLD) {
+          const idx = currentIndexRef.current;
+          if (idx < profiles.length) playSound('lose');
+          Animated.timing(position, { toValue: { x: -SCREEN_WIDTH - 100, y: gesture.dy }, duration: 200, useNativeDriver: false }).start(() => {
+            currentIndexRef.current += 1;
+            setCurrentIndex(currentIndexRef.current);
+            position.setValue({ x: 0, y: 0 });
+          });
+        } else {
+          Animated.spring(position, { toValue: { x: 0, y: 0 }, friction: 5, useNativeDriver: false }).start();
+        }
+      },
+    })
+  ).current;
 
-  const rotate = position.x.interpolate({ inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH], outputRange: ['-15deg', '0deg', '15deg'] });
+  const rotate = position.x.interpolate({ inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH], outputRange: ['-12deg', '0deg', '12deg'] });
   const likeOpacity = position.x.interpolate({ inputRange: [0, SCREEN_WIDTH / 4], outputRange: [0, 1], extrapolate: 'clamp' });
   const nopeOpacity = position.x.interpolate({ inputRange: [-SCREEN_WIDTH / 4, 0], outputRange: [1, 0], extrapolate: 'clamp' });
 
@@ -86,32 +119,50 @@ export default function DiscoverScreen({ navigation }) {
 
         <View style={s.cardArea}>
           {currentProfile ? (
-            <Animated.View style={[s.card, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]} {...panResponder.panHandlers}>
+            <Animated.View
+              key={currentIndex}
+              style={[s.card, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]}
+              {...panResponder.panHandlers}
+            >
               <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} />
               <View style={s.gradient}>
-                <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}><Text style={s.badgeText}>LIKE</Text></Animated.View>
-                <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}><Text style={s.badgeText}>NOPE</Text></Animated.View>
+                <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
+                  <Text style={s.badgeText}>LIKE</Text>
+                </Animated.View>
+                <Animated.View style={[s.badge, s.nopeBadge, { opacity: nopeOpacity }]}>
+                  <Text style={s.badgeText}>NOPE</Text>
+                </Animated.View>
                 <View style={s.info}>
                   <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
-                  <View style={s.distRow}><Ionicons name="location" size={14} color="#fff" /><Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text></View>
+                  <View style={s.distRow}>
+                    <Ionicons name="location" size={14} color="#fff" />
+                    <Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text>
+                  </View>
                   <Text style={s.bio}>{currentProfile.bio}</Text>
-                  <View style={s.tags}>{currentProfile.interests.map((i, idx) => <View key={idx} style={s.tag}><Text style={s.tagText}>{i}</Text></View>)}</View>
+                  <View style={s.tags}>
+                    {currentProfile.interests.map((interest, idx) => (
+                      <View key={idx} style={s.tag}><Text style={s.tagText}>{interest}</Text></View>
+                    ))}
+                  </View>
                 </View>
               </View>
             </Animated.View>
           ) : (
-            <View style={s.empty}><Text style={s.emptyTitle}>{t('noMoreProfiles')}</Text><Text style={s.emptyText}>{t('changeFilters')}</Text></View>
+            <View style={s.empty}>
+              <Text style={s.emptyTitle}>{t('noMoreProfiles')}</Text>
+              <Text style={s.emptyText}>{t('changeFilters')}</Text>
+            </View>
           )}
         </View>
 
         <View style={s.actions}>
-          <TouchableOpacity style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && handleSwipe('left')}>
+          <TouchableOpacity style={[s.actionBtn, { borderColor: COLORS.red }]} onPress={() => currentProfile && advanceCard('left')}>
             <Ionicons name="close" size={32} color={COLORS.red} />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => {}}>
             <Ionicons name="star" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && handleSwipe('right')}>
+          <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.gold }]} onPress={() => currentProfile && advanceCard('right')}>
             <Ionicons name="heart" size={28} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={[s.actionBtn, { backgroundColor: COLORS.purple }]} onPress={() => {}}>
@@ -127,8 +178,12 @@ export default function DiscoverScreen({ navigation }) {
             <Text style={s.matchTitle}>{t('itsAMatch')}</Text>
             <Image source={{ uri: matchUser.photos[0] }} style={s.matchPhoto} />
             <Text style={s.matchName}>You and {matchUser.name} liked each other!</Text>
-            <TouchableOpacity style={s.matchBtn} onPress={() => setMatchUser(null)}><Text style={s.matchBtnText}>{t('sendMessage')}</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => setMatchUser(null)}><Text style={s.matchKeep}>{t('keepSwiping')}</Text></TouchableOpacity>
+            <TouchableOpacity style={s.matchBtn} onPress={() => setMatchUser(null)}>
+              <Text style={s.matchBtnText}>{t('sendMessage')}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setMatchUser(null)}>
+              <Text style={s.matchKeep}>{t('keepSwiping')}</Text>
+            </TouchableOpacity>
           </View>
         </View>
       )}
@@ -145,12 +200,12 @@ const s = StyleSheet.create({
   cardArea: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   card: { width: SCREEN_WIDTH - 40, height: 520, borderRadius: 16, overflow: 'hidden', backgroundColor: '#222' },
   photo: { width: '100%', height: '100%', position: 'absolute', resizeMode: 'cover' },
-  gradient: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.001)' },
+  gradient: { flex: 1, justifyContent: 'flex-end' },
   badge: { position: 'absolute', top: 40, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3 },
-  likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.2)' },
-  nopeBadge: { left: 20, borderColor: COLORS.red, backgroundColor: 'rgba(239,68,68,0.2)' },
-  badgeText: { fontSize: 24, fontWeight: 'bold', color: '#fff' },
-  info: { padding: 20, backgroundColor: 'rgba(0,0,0,0.6)' },
+  likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.3)' },
+  nopeBadge: { left: 20, borderColor: COLORS.red, backgroundColor: 'rgba(239,68,68,0.3)' },
+  badgeText: { fontSize: 28, fontWeight: 'bold', color: '#fff' },
+  info: { padding: 20, backgroundColor: 'rgba(0,0,0,0.65)' },
   name: { fontSize: 28, fontWeight: 'bold', color: '#fff' },
   distRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4 },
   distText: { color: '#ddd', fontSize: 13 },
