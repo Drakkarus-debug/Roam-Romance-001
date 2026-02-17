@@ -194,7 +194,14 @@ export default function ProfileSetupScreen() {
             <TouchableOpacity style={s.backBtn} onPress={() => step > 0 && setStep(step - 1)} disabled={step === 0}>
               <Text style={[s.backText, step === 0 && { opacity: 0.3 }]}>{t('back')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={s.nextBtn} onPress={() => step < 5 ? setStep(step + 1) : finish()}>
+            <TouchableOpacity style={s.nextBtn} onPress={() => {
+              if (step === 0 && !data.gender) { alert(t('selectGender')); return; }
+              if (step === 1) {
+                const age = parseInt(data.age);
+                if (!data.age || isNaN(age) || age < 18 || age > 115) { alert(t('mustBe18')); return; }
+              }
+              step < 5 ? setStep(step + 1) : finish();
+            }}>
               <Text style={s.nextText}>{step < 5 ? t('next') : t('finish')}</Text>
             </TouchableOpacity>
           </View>
