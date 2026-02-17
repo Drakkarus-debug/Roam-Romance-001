@@ -79,7 +79,7 @@ const Landing = () => {
         )}
       </div>
 
-      <Card className="w-full max-w-md p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
+      <Card className="w-full max-w-md p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30 relative z-10">
         <div className="text-center mb-4">
           <div className="flex justify-center mb-3 mt-4">
             <img 
