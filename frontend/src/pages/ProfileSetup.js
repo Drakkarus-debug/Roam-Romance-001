@@ -125,7 +125,7 @@ const ProfileSetup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 relative z-[1]">
       <Card className="w-full max-w-2xl p-8 bg-black/90 backdrop-blur-sm shadow-2xl border border-yellow-500/30">
         {/* Progress Bar */}
         <div className="mb-8">

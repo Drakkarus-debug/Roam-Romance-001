@@ -16,7 +16,7 @@ const AppLayout = ({ children }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex flex-col">
+    <div className="min-h-screen flex flex-col relative z-[1]">
       {/* Main Content */}
       <main className="flex-1 overflow-auto pb-20">
         {children}

@@ -14,6 +14,16 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background: url('https://customer-assets.emergentagent.com/job_78741d56-7120-4b1e-bb03-8c74389f498e/artifacts/d3k1x2rz_ChatGPT%20Image%20Feb%2017%2C%202026%2C%2009_31_28%20PM.png') center/cover no-repeat fixed;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* Allow text selection in input fields */

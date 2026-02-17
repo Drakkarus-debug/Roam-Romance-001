@@ -55,13 +55,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('https://customer-assets.emergentagent.com/job_78741d56-7120-4b1e-bb03-8c74389f498e/artifacts/8j35j0vo_ChatGPT%20Image%20Feb%2017%2C%202026%2C%2009_31_28%20PM.png')` }}
-      />
-      <div className="absolute inset-0 bg-black/55" />
+    <div className="min-h-screen flex items-center justify-center p-4 relative z-[1]">
       {/* Language Selector Button */}
       <div className="fixed top-4 right-4 z-50">
         <Button
