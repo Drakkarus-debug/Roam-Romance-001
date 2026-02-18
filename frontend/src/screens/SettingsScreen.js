@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, Modal, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, Modal, FlatList, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, languages } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { COLORS, BG_IMAGE } from '../constants';
+import { nationalFlags } from '../nationalFlags';
 
 export default function SettingsScreen({ navigation }) {
   const { t, changeLanguage, currentLanguage } = useLanguage();
-  const { user, logout } = useAuth();
+  const { user, updateUser, logout } = useAuth();
   const [distance, setDistance] = useState(50);
   const [showLangModal, setShowLangModal] = useState(false);
+  const [showFlagModal, setShowFlagModal] = useState(false);
+  const [flagSearch, setFlagSearch] = useState('');
   const currentLang = languages.find(l => l.code === currentLanguage) || languages[0];
+  const isPaid = user?.subscription && user.subscription !== 'free';
+  const selectedFlag = nationalFlags.find(f => f.code === user?.nationalFlag);
+  const filteredFlags = flagSearch ? nationalFlags.filter(f => f.name.toLowerCase().includes(flagSearch.toLowerCase())) : nationalFlags;
 
   return (
     <ImageBackground source={{ uri: BG_IMAGE }} style={s.bg} resizeMode="cover">
