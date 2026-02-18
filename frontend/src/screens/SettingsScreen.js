@@ -91,6 +91,38 @@ export default function SettingsScreen({ navigation }) {
           </View>
         </TouchableOpacity>
       </Modal>
+
+      {/* National Flag Modal */}
+      <Modal visible={showFlagModal} transparent animationType="slide">
+        <View style={s.modalOverlay}>
+          <View style={[s.modalContent, { maxHeight: '75%' }]}>
+            <Text style={s.modalTitle}>Select Your National Flag</Text>
+            <TextInput
+              style={s.flagSearch}
+              placeholder="Search country..."
+              placeholderTextColor={COLORS.gray600}
+              value={flagSearch}
+              onChangeText={setFlagSearch}
+            />
+            {selectedFlag && (
+              <TouchableOpacity style={[s.langItem, { backgroundColor: 'rgba(239,68,68,0.15)', marginBottom: 8 }]} onPress={() => { updateUser({ nationalFlag: null }); setShowFlagModal(false); setFlagSearch(''); }}>
+                <Ionicons name="close-circle" size={22} color={COLORS.red} style={{ marginRight: 10 }} />
+                <Text style={{ color: COLORS.red, fontSize: 15 }}>Remove Flag</Text>
+              </TouchableOpacity>
+            )}
+            <FlatList
+              data={filteredFlags}
+              keyExtractor={i => i.code}
+              renderItem={({ item }) => (
+                <TouchableOpacity style={[s.langItem, item.code === user?.nationalFlag && s.langItemActive]} onPress={() => { updateUser({ nationalFlag: item.code }); setShowFlagModal(false); setFlagSearch(''); }}>
+                  <Text style={s.langItemFlag}>{item.flag}</Text>
+                  <Text style={[s.langItemName, item.code === user?.nationalFlag && { color: COLORS.gold }]}>{item.name}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 }
