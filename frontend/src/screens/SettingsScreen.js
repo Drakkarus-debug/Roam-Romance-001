@@ -119,11 +119,15 @@ export default function SettingsScreen({ navigation }) {
               keyExtractor={i => i.code}
               renderItem={({ item }) => (
                 <TouchableOpacity style={[s.langItem, item.code === user?.nationalFlag && s.langItemActive]} onPress={() => { updateUser({ nationalFlag: item.code }); setShowFlagModal(false); setFlagSearch(''); }}>
-                  <Text style={s.langItemFlag}>{item.flag}</Text>
+                  <Image source={{ uri: getFlagImageUrl(item.code, 40) }} style={s.flagListImg} />
                   <Text style={[s.langItemName, item.code === user?.nationalFlag && { color: COLORS.gold }]}>{item.name}</Text>
+                  {item.code === user?.nationalFlag && <Ionicons name="checkmark-circle" size={20} color={COLORS.gold} />}
                 </TouchableOpacity>
               )}
             />
+            <TouchableOpacity style={s.flagCloseBtn} onPress={() => { setShowFlagModal(false); setFlagSearch(''); }}>
+              <Text style={s.flagCloseBtnText}>Close</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
