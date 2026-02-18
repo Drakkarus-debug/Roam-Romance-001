@@ -4,10 +4,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { COLORS, BG_IMAGE } from '../constants';
+import { nationalFlags } from '../nationalFlags';
 
 export default function ProfileScreen({ navigation }) {
   const { t } = useLanguage();
   const { user } = useAuth();
+  const userFlag = nationalFlags.find(f => f.code === user?.nationalFlag);
 
   const detail = (label, value) => (
     <View style={s.detailRow}><Text style={s.detailLabel}>{label}</Text><Text style={s.detailValue}>{value || 'Not set'}</Text></View>
@@ -26,6 +28,7 @@ export default function ProfileScreen({ navigation }) {
 
         <View style={s.profileHeader}>
           <Image source={{ uri: user?.photos?.[0] || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop' }} style={s.avatar} />
+          {userFlag && <View style={s.flagBadge}><Text style={s.flagEmoji}>{userFlag.flag}</Text></View>}
         </View>
 
         <View style={s.card}>
