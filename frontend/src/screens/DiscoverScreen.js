@@ -138,7 +138,7 @@ export default function DiscoverScreen({ navigation }) {
                 style={[s.card, { transform: [{ translateX: posX }, { translateY: posY }, { rotate }], cursor: 'grab' }]}
                 {...gestureProps}
               >
-                <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} resizeMode="cover" />
+                <Image source={{ uri: currentProfile.photos[0] }} style={s.photo} resizeMode="contain" />
                 <Animated.View style={[s.badge, s.likeBadge, { opacity: likeOpacity }]}>
                   <Text style={s.badgeText}>LIKE</Text>
                 </Animated.View>
@@ -207,7 +207,7 @@ const s = StyleSheet.create({
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
   cardArea: { flex: 1, paddingHorizontal: 20, paddingTop: 4 },
-  card: { width: '100%', height: 320, borderTopLeftRadius: 16, borderTopRightRadius: 16, overflow: 'hidden', backgroundColor: '#111', userSelect: 'none' },
+  card: { width: '100%', height: 380, borderTopLeftRadius: 16, borderTopRightRadius: 16, overflow: 'hidden', backgroundColor: '#000', userSelect: 'none' },
   photo: { width: '100%', height: '100%' },
   badge: { position: 'absolute', top: 30, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
   likeBadge: { right: 20, borderColor: COLORS.green, backgroundColor: 'rgba(34,197,94,0.3)' },
