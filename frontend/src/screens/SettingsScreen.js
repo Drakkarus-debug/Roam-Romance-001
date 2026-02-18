@@ -155,4 +155,6 @@ const s = StyleSheet.create({
   langItemActive: { backgroundColor: 'rgba(234,179,8,0.15)' },
   langItemFlag: { fontSize: 24, marginRight: 14 },
   langItemName: { color: '#fff', fontSize: 16 },
+  premiumBadge: { color: COLORS.gold, fontSize: 12, fontWeight: 'normal' },
+  flagSearch: { backgroundColor: '#222', borderWidth: 1, borderColor: COLORS.gray700, borderRadius: 10, padding: 12, color: '#fff', fontSize: 15, marginBottom: 12 },
 });
