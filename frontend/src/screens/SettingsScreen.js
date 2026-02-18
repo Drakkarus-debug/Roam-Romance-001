@@ -42,6 +42,23 @@ export default function SettingsScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
+        {/* National Flag (Paid feature) */}
+        <TouchableOpacity style={s.card} onPress={() => isPaid ? setShowFlagModal(true) : navigation.navigate('Subscription')}>
+          <Text style={s.cardTitle}>National Flag {!isPaid && <Text style={s.premiumBadge}> Premium</Text>}</Text>
+          {isPaid ? (
+            <View style={s.langRow}>
+              <Ionicons name="flag-outline" size={20} color={COLORS.gold} />
+              <Text style={s.langText}>{selectedFlag ? selectedFlag.name : 'Select your flag'}</Text>
+              <Text style={s.langFlag}>{selectedFlag ? selectedFlag.flag : '🏳️'}</Text>
+            </View>
+          ) : (
+            <View style={s.langRow}>
+              <Ionicons name="lock-closed-outline" size={20} color={COLORS.gray600} />
+              <Text style={[s.langText, { color: COLORS.gray600 }]}>Upgrade to add your national flag</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+
         {/* Subscription */}
         <View style={s.card}>
           <Text style={s.cardTitle}>{t('subscription')}</Text>
