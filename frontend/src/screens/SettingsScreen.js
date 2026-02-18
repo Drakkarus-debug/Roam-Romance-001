@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, Modal, FlatList, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, Modal, FlatList, TextInput, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage, languages } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { COLORS, BG_IMAGE } from '../constants';
-import { nationalFlags } from '../nationalFlags';
+import { nationalFlags, getFlagImageUrl } from '../nationalFlags';
 
 export default function SettingsScreen({ navigation }) {
   const { t, changeLanguage, currentLanguage } = useLanguage();
