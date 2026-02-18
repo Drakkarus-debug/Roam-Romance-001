@@ -47,9 +47,13 @@ export default function SettingsScreen({ navigation }) {
           <Text style={s.cardTitle}>National Flag {!isPaid && <Text style={s.premiumBadge}> Premium</Text>}</Text>
           {isPaid ? (
             <View style={s.langRow}>
-              <Ionicons name="flag-outline" size={20} color={COLORS.gold} />
+              {selectedFlag ? (
+                <Image source={{ uri: getFlagImageUrl(selectedFlag.code, 40) }} style={s.flagImg} />
+              ) : (
+                <Ionicons name="flag-outline" size={20} color={COLORS.gold} />
+              )}
               <Text style={s.langText}>{selectedFlag ? selectedFlag.name : 'Select your flag'}</Text>
-              <Text style={s.langFlag}>{selectedFlag ? selectedFlag.flag : '🏳️'}</Text>
+              <Ionicons name="chevron-forward" size={18} color={COLORS.gray600} />
             </View>
           ) : (
             <View style={s.langRow}>
