@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { COLORS, BG_IMAGE } from '../constants';
-import { nationalFlags } from '../nationalFlags';
+import { nationalFlags, getFlagImageUrl } from '../nationalFlags';
 
 export default function ProfileScreen({ navigation }) {
   const { t } = useLanguage();
@@ -28,7 +28,7 @@ export default function ProfileScreen({ navigation }) {
 
         <View style={s.profileHeader}>
           <Image source={{ uri: user?.photos?.[0] || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop' }} style={s.avatar} />
-          {userFlag && <View style={s.flagBadge}><Text style={s.flagEmoji}>{userFlag.flag}</Text></View>}
+          {userFlag && <View style={s.flagBadge}><Image source={{ uri: getFlagImageUrl(userFlag.code, 80) }} style={s.flagBadgeImg} /></View>}
         </View>
 
         <View style={s.card}>
@@ -72,8 +72,8 @@ const s = StyleSheet.create({
   bannerBtnText: { color: '#000', fontWeight: 'bold', fontSize: 13 },
   profileHeader: { alignItems: 'center', marginBottom: 16, position: 'relative' },
   avatar: { width: 100, height: 100, borderRadius: 50, borderWidth: 3, borderColor: COLORS.gold },
-  flagBadge: { position: 'absolute', bottom: 0, right: '33%', backgroundColor: '#000', borderRadius: 14, width: 28, height: 28, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: COLORS.gold },
-  flagEmoji: { fontSize: 16 },
+  flagBadge: { position: 'absolute', bottom: -2, right: '30%', backgroundColor: '#000', borderRadius: 6, padding: 2, borderWidth: 2, borderColor: COLORS.gold, overflow: 'hidden' },
+  flagBadgeImg: { width: 28, height: 18, borderRadius: 3 },
   card: { backgroundColor: 'rgba(0,0,0,0.85)', borderRadius: 16, padding: 20, borderWidth: 1, borderColor: 'rgba(234,179,8,0.15)' },
   name: { fontSize: 24, fontWeight: 'bold', color: COLORS.gold },
   locRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4, marginBottom: 16 },
