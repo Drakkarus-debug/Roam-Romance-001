@@ -9,7 +9,7 @@ import { nationalFlags, getFlagImageUrl } from '../nationalFlags';
 export default function SettingsScreen({ navigation }) {
   const { t, changeLanguage, currentLanguage } = useLanguage();
   const { user, updateUser, logout } = useAuth();
-  const [distance, setDistance] = useState(50);
+  const [distance, setDistance] = useState(200);
   const [showLangModal, setShowLangModal] = useState(false);
   const [showFlagModal, setShowFlagModal] = useState(false);
   const [flagSearch, setFlagSearch] = useState('');
