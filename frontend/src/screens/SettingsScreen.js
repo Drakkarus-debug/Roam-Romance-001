@@ -165,4 +165,8 @@ const s = StyleSheet.create({
   langItemName: { color: '#fff', fontSize: 16 },
   premiumBadge: { color: COLORS.gold, fontSize: 12, fontWeight: 'normal' },
   flagSearch: { backgroundColor: '#222', borderWidth: 1, borderColor: COLORS.gray700, borderRadius: 10, padding: 12, color: '#fff', fontSize: 15, marginBottom: 12 },
+  flagImg: { width: 32, height: 22, borderRadius: 3, marginRight: 4 },
+  flagListImg: { width: 36, height: 24, borderRadius: 3, marginRight: 14 },
+  flagCloseBtn: { backgroundColor: COLORS.gray700, borderRadius: 10, padding: 14, alignItems: 'center', marginTop: 12 },
+  flagCloseBtnText: { color: '#fff', fontSize: 15, fontWeight: '600' },
 });
