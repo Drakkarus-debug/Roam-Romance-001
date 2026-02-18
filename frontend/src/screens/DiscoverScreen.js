@@ -147,7 +147,12 @@ export default function DiscoverScreen({ navigation }) {
                 </Animated.View>
               </Animated.View>
               <View style={s.info}>
-                <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
+                <View style={s.nameRow}>
+                  <Text style={s.name}>{currentProfile.name}, {currentProfile.age}</Text>
+                  {currentProfile.nationalFlag && (
+                    <Image source={{ uri: getFlagImageUrl(currentProfile.nationalFlag, 80) }} style={s.profileFlag} />
+                  )}
+                </View>
                 <Text style={s.distText}>{currentProfile.distance} {t('miles')} {t('away')}</Text>
                 <Text style={s.bio} numberOfLines={2}>{currentProfile.bio}</Text>
                 <View style={s.tags}>
