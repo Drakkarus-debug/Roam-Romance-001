@@ -4,7 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { mockUsers } from '../mockData';
-import { nationalFlags, getFlagImageUrl } from '../nationalFlags';
+import { COLORS, BG_IMAGE } from '../constants';
+import { getFlagImageUrl } from '../nationalFlags';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
