@@ -206,7 +206,7 @@ const s = StyleSheet.create({
   container: { flex: 1, paddingTop: 50, zIndex: 1 },
   hints: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 8 },
   hintText: { color: COLORS.gray400, fontSize: 12 },
-  cardArea: { flex: 1, paddingHorizontal: 20, paddingTop: 4 },
+  cardArea: { flex: 1, paddingHorizontal: 20, paddingTop: 4, alignItems: 'center' },
   card: { width: '100%', height: 380, borderTopLeftRadius: 16, borderTopRightRadius: 16, overflow: 'hidden', backgroundColor: '#000', userSelect: 'none' },
   photo: { width: '100%', height: '100%' },
   badge: { position: 'absolute', top: 30, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, borderWidth: 3, zIndex: 10 },
